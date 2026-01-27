@@ -7,13 +7,16 @@ import DataContext from '../contexts/dataContext'
 const StyledContent = styled.div`
     flex: 1;
     width: 100%;
-    min-height: 0;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    white-space: pre-wrap;
+    word-break: break-word;
+    box-sizing: border-box;
     font-family: 'MS Sans Serif', 'Fixedsys', monospace;
     font-size: 14px;
     padding: 2px;
     background: transparent;
-    overflow: scroll;
-    white-space: pre-wrap;
     user-select: text;
 
     /* Custom scrollbar styling to match React95 */
@@ -110,7 +113,7 @@ function Notepad({ closeNotepad, selectedItem, isMobile, zIndex }) {
                 left: isMobile ? '5%' : '50%',
                 top: isMobile ? '3%' : '10%',
                 width: isMobile ? '90%' : 600,
-                height: isMobile ? '85vh' : 600,
+                height: isMobile ? '85vh' : (selectedItem.id === 'about' ? 800 : 600),
                 zIndex: zIndex
             }}
             menu={[
