@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { TaskBar, List } from '@react95/core'
 import { MediaCd, Mapi32801 } from '@react95/icons'
 import styled from 'styled-components'
@@ -37,6 +37,7 @@ const IconContainer = styled.div`
 
 const StyledList = styled(List)`
     z-index: 999999;
+    position: relative;
     li:not(:has(svg)) {
         padding-inline-start: 15px;
     }
@@ -46,49 +47,73 @@ const StyledList = styled(List)`
 
 
 function Taskbar({ onClockClick }) {
+    const taskbarRef = useRef(null);
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!taskbarRef.current) return;
+
+            // Check if click is outside the taskbar wrapper
+            if (!taskbarRef.current.contains(event.target)) {
+                // Look for the menu popup (ul inside the taskbar that's not the main bar)
+                const menuPopup = taskbarRef.current.querySelector('ul');
+                if (menuPopup) {
+                    // Menu is open, click the Start button to close it
+                    const startButton = taskbarRef.current.querySelector('button');
+                    if (startButton) {
+                        startButton.click();
+                    }
+                }
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     return (
         <>
-            <StyledTaskBar
-                list={
-                    <StyledList>
-                        <List.Item
-                            icon={
-                                <IconContainer>
-                                    <StyledIcon src={`${process.env.PUBLIC_URL}/images/githubicon.png`} alt="GitHub" />
-                                </IconContainer>
-                            }
-                            onClick={() => window.open("https://github.com/brynnb", "_blank")}
-                        >
-                            GitHub
-                        </List.Item>
-                        <List.Item
-                            icon={
-                                <IconContainer>
-                                    <StyledIcon src={`${process.env.PUBLIC_URL}/images/linkedinicon.png`} alt="LinkedIn" />
-                                </IconContainer>
-                            }
-                            onClick={() => window.open("https://www.linkedin.com/in/brynn-bateman/", "_blank")}
-                        >
-                            LinkedIn
-                        </List.Item>
-                        <List.Item
-                            icon={<Mapi32801 variant="32x32_4" />}
-                            onClick={() => window.location.href = "mailto:contact2026@brynnbateman.com"}
-                        >
-                            Email Me
-                        </List.Item>
-                        <List.Divider />
-                        <List.Item
-                            icon={<MediaCd variant="32x32_4" />}
-                            onClick={() => window.open("https://music.youtube.com/playlist?list=PLHtpGEmB89DMvEtXBB_3bo2TMR_1HQTcj&si=qnJUxqjHpyCthu1z", "_blank")}
-                        >
-                            Ambience Playlist
-                        </List.Item>
-                    </StyledList>
-                }
-            />
+            <div ref={taskbarRef}>
+                <StyledTaskBar
+                    list={
+                        <StyledList>
+                            <List.Item
+                                icon={
+                                    <IconContainer>
+                                        <StyledIcon src={`${process.env.PUBLIC_URL}/images/githubicon.png`} alt="GitHub" />
+                                    </IconContainer>
+                                }
+                                onClick={() => window.open("https://github.com/brynnb", "_blank")}
+                            >
+                                GitHub
+                            </List.Item>
+                            <List.Item
+                                icon={
+                                    <IconContainer>
+                                        <StyledIcon src={`${process.env.PUBLIC_URL}/images/linkedinicon.png`} alt="LinkedIn" />
+                                    </IconContainer>
+                                }
+                                onClick={() => window.open("https://www.linkedin.com/in/brynn-bateman/", "_blank")}
+                            >
+                                LinkedIn
+                            </List.Item>
+                            <List.Item
+                                icon={<Mapi32801 variant="32x32_4" />}
+                                onClick={() => window.location.href = "mailto:contact2026@brynnbateman.com"}
+                            >
+                                Email Me
+                            </List.Item>
+                            <List.Divider />
+                            <List.Item
+                                icon={<MediaCd variant="32x32_4" />}
+                                onClick={() => window.open("https://music.youtube.com/playlist?list=PLHtpGEmB89DMvEtXBB_3bo2TMR_1HQTcj&si=qnJUxqjHpyCthu1z", "_blank")}
+                            >
+                                Ambience Playlist
+                            </List.Item>
+                        </StyledList>
+                    }
+                />
+            </div>
             <Tray onClockClick={onClockClick} />
         </>
     )

@@ -335,7 +335,7 @@ function Desktop() {
                     <Alert
                         title="System Message"
                         type="error"
-                        message="please don't click the clock"
+                        message="don't click the clock!"
                         titleBarOptions={[
                             <TitleBar.Close key="close" onClick={closeClockAlert} />
                         ]}
