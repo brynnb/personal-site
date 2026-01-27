@@ -37,6 +37,11 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.2em !important;
   }
 
+  /* Force Start Menu popup above all windows */
+  [style*="position: fixed"][style*="bottom: 0px"] > [style*="position: absolute"] {
+    z-index: 999999 !important;
+  }
+
   ${Cursor.Auto}
 `;
 

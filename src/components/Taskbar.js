@@ -6,10 +6,16 @@ import Tray from './Tray'
 
 const StyledTaskBar = styled(TaskBar)`
     padding-right: 80px;
+    z-index: 999999 !important;
     
     /* Hide the built-in clock */
     & > div:last-child {
         display: none !important;
+    }
+    
+    /* Start Menu popup should be above all windows */
+    & > div:first-child {
+        z-index: 999999 !important;
     }
 `;
 
@@ -30,6 +36,7 @@ const IconContainer = styled.div`
 `;
 
 const StyledList = styled(List)`
+    z-index: 999999;
     li:not(:has(svg)) {
         padding-inline-start: 15px;
     }

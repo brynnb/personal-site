@@ -12,7 +12,7 @@ const StyledTray = styled(Frame)`
     align-items: center;
     padding: 0 4px;
     gap: 4px;
-    z-index: 100000;
+    z-index: 999999;
     box-shadow: inset -1px -1px #ffffff, inset 1px 1px #808080;
     background-color: #c0c0c0;
 `;
