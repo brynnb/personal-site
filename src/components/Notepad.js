@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Modal, Frame, TitleBar, TextArea } from '@react95/core'
+import { Modal, Frame, TitleBar } from '@react95/core'
 import { Notepad2 as NotepadIcon } from '@react95/icons'
 import styled from 'styled-components'
 import DataContext from '../contexts/dataContext'

@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
-import DataContext from '../contexts/dataContext'
-import { TaskBar, List, Alert, TitleBar } from '@react95/core'
+import React from 'react'
+import { TaskBar, List } from '@react95/core'
 import { Computer, Network2, Globe, MediaCd } from '@react95/icons'
 import styled from 'styled-components'
 import Tray from './Tray'
@@ -14,14 +13,11 @@ const StyledTaskBar = styled(TaskBar)`
     }
 `;
 
-const Link = styled.a`
-    text-decoration: none;
-    color: inherit;
-`
+
 
 
 function Taskbar({ onClockClick }) {
-    const { projectRepo, react95Repo } = useContext(DataContext).getProjectInfo();
+
 
     return (
         <>

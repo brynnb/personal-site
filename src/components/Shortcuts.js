@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MediaCd, Mspaint, Notepad2, Computer, Network2, RecycleFull, Explore, Folder } from '@react95/icons'
+import { Mspaint, Notepad2, Computer, Network2, RecycleFull, Explore, Folder } from '@react95/icons'
 import { startWebamp } from '../utils/startWebamp';
 
 const StyledShorcut = styled.div`

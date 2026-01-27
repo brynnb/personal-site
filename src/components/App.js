@@ -6,7 +6,6 @@ import { ClippyProvider } from '@react95/clippy';
 import { Cursor } from '@react95/core';
 import DataService from '../services/dataService';
 import DataContext from '../contexts/dataContext';
-import Taskbar from './Taskbar';
 import Desktop from './Desktop';
 
 const dataService = new DataService();
