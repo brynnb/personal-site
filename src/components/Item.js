@@ -48,9 +48,21 @@ function File({ item, openNotepad, openFolder, isSelected, onSelect }) {
 	const { name, icon, type } = item;
 	const IconComponent = Icons[iconMap[icon]] || Icons.Notepad2;
 
+	const lastClickTime = React.useRef(0);
+
+	//accommodate for double click on both desktop and mobile browsers
 	const handleSingleClick = (e) => {
 		e.stopPropagation();
-		onSelect();
+		const currentTime = Date.now();
+		const timeDiff = currentTime - lastClickTime.current;
+
+		if (timeDiff < 500) {
+			handleDoubleClick(e);
+			lastClickTime.current = 0; // reset
+		} else {
+			onSelect();
+			lastClickTime.current = currentTime;
+		}
 	};
 
 	const handleDoubleClick = (e) => {
@@ -63,7 +75,7 @@ function File({ item, openNotepad, openFolder, isSelected, onSelect }) {
 	};
 
 	return (
-		<StyledItem isSelected={isSelected} onClick={handleSingleClick} onDoubleClick={handleDoubleClick}>
+		<StyledItem isSelected={isSelected} onClick={handleSingleClick}>
 			<div className="icon-wrapper">
 				<IconComponent variant="32x32_4" />
 			</div>

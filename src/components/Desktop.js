@@ -44,6 +44,30 @@ function Desktop() {
     const [photoOpened, togglePhoto] = useState(false);
     const [defragOpened, toggleDefrag] = useState(false);
 
+    const [zIndices, setZIndices] = useState({
+        explorer: 10,
+        moreStuff: 11,
+        secretStuff: 12,
+        recycleBin: 13,
+        notepad: 14,
+        paint: 15,
+        internet: 16,
+        hamsterDance: 17,
+        photo: 18,
+        defrag: 19,
+        clockAlert: 1000000
+    });
+
+    const bringToFront = useCallback((id) => {
+        setZIndices(prev => {
+            const maxZ = Math.max(...Object.values(prev).filter(z => z < 1000000));
+            return {
+                ...prev,
+                [id]: maxZ + 1
+            };
+        });
+    }, []);
+
     useEffect(() => {
         if (clippy) {
             clippy.show();
@@ -82,7 +106,8 @@ function Desktop() {
             const aboutItem = data.getItem('about');
             setSelectedItem(aboutItem);
             toggleNotepad(true);
-        }, [data]);
+            bringToFront('notepad');
+        }, [data, bringToFront]);
 
 
     const closeExplorer = useCallback(() => {
@@ -91,18 +116,24 @@ function Desktop() {
 
     const openExplorer = useCallback(() => {
         toggleExplorer(true);
-    }, []);
+        bringToFront('explorer');
+    }, [bringToFront]);
 
     const closeMoreStuff = useCallback(() => toggleMoreStuff(false), []);
     const closeSecretStuff = useCallback(() => toggleSecretStuff(false), []);
-    const openDefrag = useCallback(() => toggleDefrag(true), []);
+    const openDefrag = useCallback(() => {
+        toggleDefrag(true);
+        bringToFront('defrag');
+    }, [bringToFront]);
     const closeDefrag = useCallback(() => toggleDefrag(false), []);
 
     const openFolder = (item) => {
         if (item.id === 'more-stuff') {
             toggleMoreStuff(true);
+            bringToFront('moreStuff');
         } else if (item.id === 'secret-stuff') {
             toggleSecretStuff(true);
+            bringToFront('secretStuff');
         }
     }
 
@@ -113,11 +144,13 @@ function Desktop() {
     const openNotepad = useCallback((item) => {
         setSelectedItem(item)
         toggleNotepad(true);
-    }, []);
+        bringToFront('notepad');
+    }, [bringToFront]);
 
     const openPaint = useCallback(() => {
         togglePaint(true);
-    }, []);
+        bringToFront('paint');
+    }, [bringToFront]);
 
     const closePaint = useCallback(() => {
         togglePaint(false);
@@ -125,7 +158,8 @@ function Desktop() {
 
     const openRecycleBin = useCallback(() => {
         toggleRecycleBin(true);
-    }, []);
+        bringToFront('recycleBin');
+    }, [bringToFront]);
 
     const closeRecycleBin = useCallback(() => {
         toggleRecycleBin(false);
@@ -133,7 +167,8 @@ function Desktop() {
 
     const openInternet = useCallback(() => {
         toggleInternet(true);
-    }, []);
+        bringToFront('internet');
+    }, [bringToFront]);
 
     const closeInternet = useCallback(() => {
         toggleInternet(false);
@@ -141,7 +176,8 @@ function Desktop() {
 
     const openHamsterDance = useCallback(() => {
         toggleHamsterDance(true);
-    }, []);
+        bringToFront('hamsterDance');
+    }, [bringToFront]);
 
     const closeHamsterDance = useCallback(() => {
         toggleHamsterDance(false);
@@ -150,7 +186,10 @@ function Desktop() {
     const openClockAlert = useCallback(() => toggleClockAlert(true), []);
     const closeClockAlert = useCallback(() => toggleClockAlert(false), []);
 
-    const openPhoto = useCallback(() => togglePhoto(true), []);
+    const openPhoto = useCallback(() => {
+        togglePhoto(true);
+        bringToFront('photo');
+    }, [bringToFront]);
     const closePhoto = useCallback(() => togglePhoto(false), []);
 
     const handleBackgroundClick = useCallback((e) => {
@@ -186,7 +225,21 @@ function Desktop() {
             />
             {
                 explorerOpened && (
-                    <Explorer items={items} closeExplorer={closeExplorer} openNotepad={openNotepad} openFolder={openFolder} isMobile={isMobile} title="Stuff" icon="Folder" />
+                    <Explorer
+                        items={items}
+                        closeExplorer={closeExplorer}
+                        openNotepad={openNotepad}
+                        openFolder={openFolder}
+                        isMobile={isMobile}
+                        title="Stuff"
+                        icon="Folder"
+                        style={{
+                            left: isMobile ? '5%' : '10%',
+                            top: isMobile ? '10%' : '15%',
+                            zIndex: zIndices.explorer
+                        }}
+                        onMouseDown={() => bringToFront('explorer')}
+                    />
                 )
             }
             {
@@ -200,7 +253,12 @@ function Desktop() {
                         title="More Stuff"
                         id="more-stuff"
                         icon="Folder"
-                        style={{ left: isMobile ? '5%' : '20%', top: '25%' }}
+                        style={{
+                            left: isMobile ? '5%' : '20%',
+                            top: '25%',
+                            zIndex: zIndices.moreStuff
+                        }}
+                        onMouseDown={() => bringToFront('moreStuff')}
                     />
                 )
             }
@@ -215,7 +273,12 @@ function Desktop() {
                         title="Really Secret Stuff"
                         id="secret-stuff"
                         icon="Folder"
-                        style={{ left: isMobile ? '5%' : '25%', top: '30%' }}
+                        style={{
+                            left: isMobile ? '5%' : '25%',
+                            top: '30%',
+                            zIndex: zIndices.secretStuff
+                        }}
+                        onMouseDown={() => bringToFront('secretStuff')}
                     />
                 )
             }
@@ -230,27 +293,41 @@ function Desktop() {
                         title="Recycle Bin"
                         id="recycle-bin"
                         icon="RecycleFull"
+                        style={{
+                            left: isMobile ? '5%' : '15%',
+                            top: isMobile ? '15%' : '20%',
+                            zIndex: zIndices.recycleBin
+                        }}
+                        onMouseDown={() => bringToFront('recycleBin')}
                     />
                 )
             }
             {
                 notepadOpened && (
-                    <Notepad closeNotepad={closeNotepad} selectedItem={selectedItem} isMobile={isMobile} />
+                    <div onMouseDown={() => bringToFront('notepad')}>
+                        <Notepad closeNotepad={closeNotepad} selectedItem={selectedItem} isMobile={isMobile} zIndex={zIndices.notepad} />
+                    </div>
                 )
             }
             {
                 paintOpened && (
-                    <Paint closePaint={closePaint} />
+                    <div onMouseDown={() => bringToFront('paint')}>
+                        <Paint closePaint={closePaint} zIndex={zIndices.paint} />
+                    </div>
                 )
             }
             {
                 internetOpened && (
-                    <Internet closeInternet={closeInternet} />
+                    <div onMouseDown={() => bringToFront('internet')}>
+                        <Internet closeInternet={closeInternet} zIndex={zIndices.internet} />
+                    </div>
                 )
             }
             {
                 hamsterDanceOpened && (
-                    <HamsterDance closeHamsterDance={closeHamsterDance} />
+                    <div onMouseDown={() => bringToFront('hamsterDance')}>
+                        <HamsterDance closeHamsterDance={closeHamsterDance} zIndex={zIndices.hamsterDance} />
+                    </div>
                 )
             }
             {
@@ -295,9 +372,10 @@ function Desktop() {
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            zIndex: 9999,
+                            zIndex: zIndices.photo,
                             userSelect: 'none'
                         }}
+                        onMouseDown={() => bringToFront('photo')}
                     >
                         <div style={{ padding: '10px', display: 'flex', justifyContent: 'center', backgroundColor: '#c0c0c0', userSelect: 'none' }}>
                             {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
@@ -312,7 +390,9 @@ function Desktop() {
             }
             {
                 defragOpened && (
-                    <Defrag closeDefrag={closeDefrag} />
+                    <div onMouseDown={() => bringToFront('defrag')}>
+                        <Defrag closeDefrag={closeDefrag} zIndex={zIndices.defrag} />
+                    </div>
                 )
             }
             <Player />

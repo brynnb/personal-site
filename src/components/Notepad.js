@@ -68,7 +68,7 @@ const linkify = (text) => {
     });
 };
 
-function Notepad({ closeNotepad, selectedItem, isMobile }) {
+function Notepad({ closeNotepad, selectedItem, isMobile, zIndex }) {
     const data = useContext(DataContext);
     const fullItem = data.getItem(selectedItem.id);
 
@@ -111,6 +111,7 @@ function Notepad({ closeNotepad, selectedItem, isMobile }) {
                 top: isMobile ? '3%' : '10%',
                 width: isMobile ? '90%' : 600,
                 height: isMobile ? '85vh' : 600,
+                zIndex: zIndex
             }}
             menu={[
                 { name: 'File', list: [] },

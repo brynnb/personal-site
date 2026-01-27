@@ -1,8 +1,14 @@
 import Webamp from 'webamp'
 
+let webampInstance = null;
+
 const startWebamp = () => {
+    if (webampInstance) {
+        return;
+    }
+
     if (Webamp.browserIsSupported()) {
-        const webamp = new Webamp({
+        webampInstance = new Webamp({
             initialTracks: [{
                 metaData: {
                     artist: "Microsoft",
@@ -12,12 +18,13 @@ const startWebamp = () => {
                 duration: 7
             }]
         });
-        webamp.onClose(() => {
-            webamp.dispose();
+
+        webampInstance.onClose(() => {
+            webampInstance.dispose();
+            webampInstance = null;
         })
 
-        webamp.renderWhenReady(document.getElementById('winamp-container'));
-
+        webampInstance.renderWhenReady(document.getElementById('winamp-container'));
     }
 }
 

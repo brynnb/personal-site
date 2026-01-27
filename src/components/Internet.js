@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, TitleBar } from '@react95/core';
 import { Globe } from '@react95/icons';
 
-const Internet = ({ closeInternet }) => {
+const Internet = ({ closeInternet, zIndex }) => {
     return (
         <Modal
             id="internet"
@@ -18,7 +18,7 @@ const Internet = ({ closeInternet }) => {
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
-                zIndex: 9999,
+                zIndex: zIndex,
                 userSelect: 'none'
             }}
         >

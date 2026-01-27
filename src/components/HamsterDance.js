@@ -39,7 +39,7 @@ const AudioControl = styled.div`
     justify-content: center;
 `;
 
-const HamsterDance = ({ closeHamsterDance }) => {
+const HamsterDance = ({ closeHamsterDance, zIndex }) => {
     const [isMuted, setIsMuted] = useState(true);
     const audioRef = useRef(null);
 
@@ -68,7 +68,7 @@ const HamsterDance = ({ closeHamsterDance }) => {
                 top: '40%',
                 left: '45%',
                 transform: 'translate(-50%, -50%)',
-                zIndex: 9999,
+                zIndex: zIndex,
                 userSelect: 'none'
             }}
         >

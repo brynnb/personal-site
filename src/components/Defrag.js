@@ -158,7 +158,7 @@ const DefragContent = memo(({ isPaused, setIsPaused, closeDefrag }) => {
     );
 });
 
-const Defrag = ({ closeDefrag }) => {
+const Defrag = ({ closeDefrag, zIndex }) => {
     const [isPaused, setIsPaused] = useState(false);
 
     return (
@@ -175,6 +175,7 @@ const Defrag = ({ closeDefrag }) => {
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
+                zIndex: zIndex
             }}
         >
             <DefragContent

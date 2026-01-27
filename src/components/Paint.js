@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Modal, Frame, TitleBar, Alert } from "@react95/core";
 import { Mspaint } from "@react95/icons";
 
-function Paint({ closePaint }) {
+function Paint({ closePaint, zIndex }) {
     const [showAlert, setShowAlert] = useState(false);
     const [showModal, setShowModal] = useState(true);
     const windowWidth = useRef(window.innerWidth);
@@ -65,7 +65,8 @@ function Paint({ closePaint }) {
                         maxWidth: '100vw',
                         maxHeight: '100vh',
                         top: 0,
-                        left: 0
+                        left: 0,
+                        zIndex: zIndex
                     }}
                 >
                     <Frame style={{ padding: 0, width: "100%", height: "100%", border: 'none' }}>

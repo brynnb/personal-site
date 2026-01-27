@@ -44,22 +44,30 @@ const StyledIcon = styled.img`
 `;
 
 function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openInternet, openHamsterDance, openPhoto, openDefrag, activeSelection, setActiveSelection }) {
-    const handleIconClick = (id, e) => {
-        e.stopPropagation();
-        setActiveSelection(id);
-    };
+    const lastClickTime = React.useRef(0);
+    const lastClickId = React.useRef(null);
 
-    const handleIconDoubleClick = (action, e) => {
+    const handleIconClick = (id, action, e) => {
         e.stopPropagation();
-        action();
+        const currentTime = Date.now();
+        const timeDiff = currentTime - lastClickTime.current;
+
+        // If it's the same icon and within 500ms, trigger open action
+        if (lastClickId.current === id && timeDiff < 500) {
+            action();
+            lastClickId.current = null; // reset to prevent triple-click "opening again"
+        } else {
+            setActiveSelection(id);
+            lastClickTime.current = currentTime;
+            lastClickId.current = id;
+        }
     };
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', maxHeight: 'calc(100vh - 30px)', width: 'fit-content' }}>
             <StyledShorcut
                 isSelected={activeSelection === 'computer'}
-                onClick={(e) => handleIconClick('computer', e)}
-                onDoubleClick={(e) => handleIconDoubleClick(openDefrag, e)}
+                onClick={(e) => handleIconClick('computer', openDefrag, e)}
             >
                 <div className="icon-wrapper">
                     <Computer variant="32x32_4" />
@@ -69,8 +77,7 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
 
             <StyledShorcut
                 isSelected={activeSelection === 'network'}
-                onClick={(e) => handleIconClick('network', e)}
-                onDoubleClick={(e) => handleIconDoubleClick(openHamsterDance, e)}
+                onClick={(e) => handleIconClick('network', openHamsterDance, e)}
             >
                 <div className="icon-wrapper">
                     <Network2 variant="32x32_4" />
@@ -80,8 +87,7 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
 
             <StyledShorcut
                 isSelected={activeSelection === 'internet'}
-                onClick={(e) => handleIconClick('internet', e)}
-                onDoubleClick={(e) => handleIconDoubleClick(openInternet, e)}
+                onClick={(e) => handleIconClick('internet', openInternet, e)}
             >
                 <div className="icon-wrapper">
                     <Explore variant="32x32_4" />
@@ -91,8 +97,7 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
 
             <StyledShorcut
                 isSelected={activeSelection === 'recycle'}
-                onClick={(e) => handleIconClick('recycle', e)}
-                onDoubleClick={(e) => handleIconDoubleClick(openRecycleBin, e)}
+                onClick={(e) => handleIconClick('recycle', openRecycleBin, e)}
             >
                 <div className="icon-wrapper">
                     <RecycleFull variant="32x32_4" />
@@ -102,8 +107,7 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
 
             <StyledShorcut
                 isSelected={activeSelection === 'explorer'}
-                onClick={(e) => handleIconClick('explorer', e)}
-                onDoubleClick={(e) => handleIconDoubleClick(openExplorer, e)}
+                onClick={(e) => handleIconClick('explorer', openExplorer, e)}
             >
                 <div className="icon-wrapper">
                     <Folder variant="32x32_4" />
@@ -113,8 +117,7 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
 
             <StyledShorcut
                 isSelected={activeSelection === 'paint'}
-                onClick={(e) => handleIconClick('paint', e)}
-                onDoubleClick={(e) => handleIconDoubleClick(openPaint, e)}
+                onClick={(e) => handleIconClick('paint', openPaint, e)}
             >
                 <div className="icon-wrapper">
                     <Mspaint variant="32x32_4" />
@@ -124,8 +127,7 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
 
             <StyledShorcut
                 isSelected={activeSelection === 'idlequest'}
-                onClick={(e) => handleIconClick('idlequest', e)}
-                onDoubleClick={(e) => handleIconDoubleClick(() => window.open('https://idlequest.net', '_blank'), e)}
+                onClick={(e) => handleIconClick('idlequest', () => window.open('https://idlequest.net', '_blank'), e)}
             >
                 <div className="icon-wrapper">
                     <StyledIcon
@@ -138,8 +140,7 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
 
             <StyledShorcut
                 isSelected={activeSelection === 'focustavern'}
-                onClick={(e) => handleIconClick('focustavern', e)}
-                onDoubleClick={(e) => handleIconDoubleClick(() => window.open('https://focustavern.com', '_blank'), e)}
+                onClick={(e) => handleIconClick('focustavern', () => window.open('https://focustavern.com', '_blank'), e)}
             >
                 <div className="icon-wrapper">
                     <StyledIcon
@@ -152,8 +153,7 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
 
             <StyledShorcut
                 isSelected={activeSelection === 'media'}
-                onClick={(e) => handleIconClick('media', e)}
-                onDoubleClick={(e) => handleIconDoubleClick(startWebamp, e)}
+                onClick={(e) => handleIconClick('media', startWebamp, e)}
             >
                 <div className="icon-wrapper">
                     <StyledIcon
@@ -166,8 +166,7 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
 
             <StyledShorcut
                 isSelected={activeSelection === 'photo'}
-                onClick={(e) => handleIconClick('photo', e)}
-                onDoubleClick={(e) => handleIconDoubleClick(openPhoto, e)}
+                onClick={(e) => handleIconClick('photo', openPhoto, e)}
             >
                 <div className="icon-wrapper">
                     <Wangimg130 variant="32x32_4" />
@@ -177,8 +176,7 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
 
             <StyledShorcut
                 isSelected={activeSelection === 'about'}
-                onClick={(e) => handleIconClick('about', e)}
-                onDoubleClick={(e) => handleIconDoubleClick(() => openNotepad({ id: 'about', name: 'About.txt' }), e)}
+                onClick={(e) => handleIconClick('about', () => openNotepad({ id: 'about', name: 'About.txt' }), e)}
             >
                 <div className="icon-wrapper">
                     <Notepad2 variant="32x32_4" />
