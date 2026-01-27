@@ -1,6 +1,6 @@
 import React from 'react'
 import { TaskBar, List } from '@react95/core'
-import { Computer, Network2, Globe, MediaCd } from '@react95/icons'
+import { MediaCd, Mapi32801 } from '@react95/icons'
 import styled from 'styled-components'
 import Tray from './Tray'
 
@@ -29,6 +29,12 @@ const IconContainer = styled.div`
     margin-right: 8px; /* Give the text more space */
 `;
 
+const StyledList = styled(List)`
+    li:not(:has(svg)) {
+        padding-inline-start: 15px;
+    }
+`;
+
 
 
 
@@ -39,7 +45,7 @@ function Taskbar({ onClockClick }) {
         <>
             <StyledTaskBar
                 list={
-                    <List>
+                    <StyledList>
                         <List.Item
                             icon={
                                 <IconContainer>
@@ -61,7 +67,7 @@ function Taskbar({ onClockClick }) {
                             LinkedIn
                         </List.Item>
                         <List.Item
-                            icon={<Globe variant="32x32_4" />}
+                            icon={<Mapi32801 variant="32x32_4" />}
                             onClick={() => window.location.href = "mailto:contact2026@brynnbateman.com"}
                         >
                             Email Me
@@ -73,7 +79,7 @@ function Taskbar({ onClockClick }) {
                         >
                             Ambience Playlist
                         </List.Item>
-                    </List>
+                    </StyledList>
                 }
             />
             <Tray onClockClick={onClockClick} />

@@ -300,6 +300,7 @@ function Desktop() {
                         }}
                     >
                         <div style={{ padding: '10px', display: 'flex', justifyContent: 'center', backgroundColor: '#c0c0c0', userSelect: 'none' }}>
+                            {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
                             <img
                                 src={`${process.env.PUBLIC_URL}/images/hi-res-travel-photo.jpg`}
                                 alt="High Resolution Travel Photo"

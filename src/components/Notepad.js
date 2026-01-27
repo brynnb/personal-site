@@ -41,9 +41,21 @@ const StyledContent = styled.div`
 `;
 
 const linkify = (text) => {
-    const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9.-]+\.[a-z]{2,})/g;
-    return text.split(urlRegex).map((part, i) => {
-        if (part.match(urlRegex)) {
+    // Match emails OR URLs
+    // Group 1: Emails (to be ignored/text)
+    // Group 2: URLs (to be linked)
+    const combinedRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})|(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9.-]+\.[a-z]{2,})/g;
+
+    return text.split(combinedRegex).map((part, i) => {
+        if (!part) return null;
+
+        // If it's an email (checked against the first part of the regex)
+        if (part.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+            return part;
+        }
+
+        // If it's a URL
+        if (part.match(/^(https?:\/\/|www\.|[a-zA-Z0-9.-]+\.[a-z]{2,})/)) {
             const url = part.startsWith('http') ? part : `http://${part}`;
             return (
                 <a key={i} href={url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
@@ -51,6 +63,7 @@ const linkify = (text) => {
                 </a>
             );
         }
+
         return part;
     });
 };
