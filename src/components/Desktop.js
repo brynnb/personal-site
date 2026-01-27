@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useCallback } from 'react'
 import Explorer from './Explorer'
 import Notepad from './Notepad';
 import DataContext from '../contexts/dataContext'
@@ -8,9 +8,10 @@ import Paint from './Paint';
 import Internet from './Internet';
 import HamsterDance from './HamsterDance';
 import Taskbar from './Taskbar';
-import { Alert, TitleBar } from '@react95/core';
-
+import { Alert, TitleBar, Modal } from '@react95/core';
+import { Wangimg130 } from '@react95/icons';
 import { useClippy } from '@react95/clippy';
+import Defrag from './Defrag';
 
 const funnyLines = [
     "bill gates tells me to burn things",
@@ -40,6 +41,8 @@ function Desktop() {
     const [moreStuffItems, setMoreStuffItems] = useState([]);
     const [secretStuffItems, setSecretStuffItems] = useState([]);
     const [clockAlertOpened, toggleClockAlert] = useState(false);
+    const [photoOpened, togglePhoto] = useState(false);
+    const [defragOpened, toggleDefrag] = useState(false);
 
     useEffect(() => {
         if (clippy) {
@@ -82,16 +85,18 @@ function Desktop() {
         }, [data]);
 
 
-    const closeExplorer = () => {
+    const closeExplorer = useCallback(() => {
         toggleExplorer(false);
-    };
+    }, []);
 
-    const openExplorer = () => {
+    const openExplorer = useCallback(() => {
         toggleExplorer(true);
-    };
+    }, []);
 
-    const closeMoreStuff = () => toggleMoreStuff(false);
-    const closeSecretStuff = () => toggleSecretStuff(false);
+    const closeMoreStuff = useCallback(() => toggleMoreStuff(false), []);
+    const closeSecretStuff = useCallback(() => toggleSecretStuff(false), []);
+    const openDefrag = useCallback(() => toggleDefrag(true), []);
+    const closeDefrag = useCallback(() => toggleDefrag(false), []);
 
     const openFolder = (item) => {
         if (item.id === 'more-stuff') {
@@ -101,56 +106,59 @@ function Desktop() {
         }
     }
 
-    const closeNotepad = () => {
+    const closeNotepad = useCallback(() => {
         toggleNotepad(false);
-    };
+    }, []);
 
-    const openNotepad = (item) => {
+    const openNotepad = useCallback((item) => {
         setSelectedItem(item)
         toggleNotepad(true);
-    };
+    }, []);
 
-    const openPaint = () => {
+    const openPaint = useCallback(() => {
         togglePaint(true);
-    };
+    }, []);
 
-    const closePaint = () => {
+    const closePaint = useCallback(() => {
         togglePaint(false);
-    };
+    }, []);
 
-    const openRecycleBin = () => {
+    const openRecycleBin = useCallback(() => {
         toggleRecycleBin(true);
-    };
+    }, []);
 
-    const closeRecycleBin = () => {
+    const closeRecycleBin = useCallback(() => {
         toggleRecycleBin(false);
-    };
+    }, []);
 
-    const openInternet = () => {
+    const openInternet = useCallback(() => {
         toggleInternet(true);
-    };
+    }, []);
 
-    const closeInternet = () => {
+    const closeInternet = useCallback(() => {
         toggleInternet(false);
-    };
+    }, []);
 
-    const openHamsterDance = () => {
+    const openHamsterDance = useCallback(() => {
         toggleHamsterDance(true);
-    };
+    }, []);
 
-    const closeHamsterDance = () => {
+    const closeHamsterDance = useCallback(() => {
         toggleHamsterDance(false);
-    };
+    }, []);
 
-    const openClockAlert = () => toggleClockAlert(true);
-    const closeClockAlert = () => toggleClockAlert(false);
+    const openClockAlert = useCallback(() => toggleClockAlert(true), []);
+    const closeClockAlert = useCallback(() => toggleClockAlert(false), []);
 
-    const handleBackgroundClick = (e) => {
+    const openPhoto = useCallback(() => togglePhoto(true), []);
+    const closePhoto = useCallback(() => togglePhoto(false), []);
+
+    const handleBackgroundClick = useCallback((e) => {
         // Only deselect if we click the actual desktop background
         if (e.target === e.currentTarget) {
             setActiveSelection(null);
         }
-    };
+    }, []);
 
     return (
         <div
@@ -173,6 +181,8 @@ function Desktop() {
                 openHamsterDance={openHamsterDance}
                 activeSelection={activeSelection}
                 setActiveSelection={setActiveSelection}
+                openPhoto={openPhoto}
+                openDefrag={openDefrag}
             />
             {
                 explorerOpened && (
@@ -266,6 +276,42 @@ function Desktop() {
                             zIndex: 1000000
                         }}
                     />
+                )
+            }
+            {
+                photoOpened && (
+                    <Modal
+                        id="photo"
+                        icon={<Wangimg130 variant="16x16_4" />}
+                        title="hi-res-travel-photo.jpg"
+                        titleBarOptions={
+                            <TitleBar.Close onClick={closePhoto} />
+                        }
+                        style={{
+                            width: 'auto',
+                            maxWidth: '90vw',
+                            height: 'auto',
+                            position: 'fixed',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            zIndex: 9999,
+                            userSelect: 'none'
+                        }}
+                    >
+                        <div style={{ padding: '10px', display: 'flex', justifyContent: 'center', backgroundColor: '#c0c0c0', userSelect: 'none' }}>
+                            <img
+                                src={`${process.env.PUBLIC_URL}/images/hi-res-travel-photo.jpg`}
+                                alt="High Resolution Travel Photo"
+                                style={{ maxWidth: '100%', height: 'auto', imageRendering: 'pixelated' }}
+                            />
+                        </div>
+                    </Modal>
+                )
+            }
+            {
+                defragOpened && (
+                    <Defrag closeDefrag={closeDefrag} />
                 )
             }
             <Player />

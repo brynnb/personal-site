@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Mspaint, Notepad2, Computer, Network2, RecycleFull, Explore, Folder } from '@react95/icons'
+import { Mspaint, Notepad2, Computer, Network2, RecycleFull, Explore, Folder, Wangimg130 } from '@react95/icons'
 import { startWebamp } from '../utils/startWebamp';
 
 const StyledShorcut = styled.div`
@@ -43,7 +43,7 @@ const StyledIcon = styled.img`
     image-rendering: pixelated;
 `;
 
-function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openInternet, openHamsterDance, activeSelection, setActiveSelection }) {
+function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openInternet, openHamsterDance, openPhoto, openDefrag, activeSelection, setActiveSelection }) {
     const handleIconClick = (id, e) => {
         e.stopPropagation();
         setActiveSelection(id);
@@ -59,7 +59,7 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
             <StyledShorcut
                 isSelected={activeSelection === 'computer'}
                 onClick={(e) => handleIconClick('computer', e)}
-                onDoubleClick={(e) => handleIconDoubleClick(() => { }, e)}
+                onDoubleClick={(e) => handleIconDoubleClick(openDefrag, e)}
             >
                 <div className="icon-wrapper">
                     <Computer variant="32x32_4" />
@@ -165,6 +165,17 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
             </StyledShorcut>
 
             <StyledShorcut
+                isSelected={activeSelection === 'photo'}
+                onClick={(e) => handleIconClick('photo', e)}
+                onDoubleClick={(e) => handleIconDoubleClick(openPhoto, e)}
+            >
+                <div className="icon-wrapper">
+                    <Wangimg130 variant="32x32_4" />
+                </div>
+                <div className="shortcut-label">hi-res-travel-photo.jpg</div>
+            </StyledShorcut>
+
+            <StyledShorcut
                 isSelected={activeSelection === 'about'}
                 onClick={(e) => handleIconClick('about', e)}
                 onDoubleClick={(e) => handleIconDoubleClick(() => openNotepad({ id: 'about', name: 'About.txt' }), e)}
@@ -178,4 +189,4 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
     )
 }
 
-export default Shortcuts
+export default React.memo(Shortcuts);

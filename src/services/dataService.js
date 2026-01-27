@@ -11,9 +11,10 @@ export default class DataService {
         content: {
           paragraphs: [
             "Hi, I'm Brynn. I've been immersed in software for most of my life, starting at age 11 with Liberty BASIC. My early days were spent building GeoCities sites to host GameBoy emulators and Pokémon ROMs - a passion that eventually evolved into higher-stakes professional work. Throughout my career, I've had the opportunity to build solutions for high-profile clients like Amazon, Salesforce, NetSuite, Oracle, and Goodwill.",
-            "Over the past couple of years, I’ve taken a break from the corporate world to travel, reconnect with family, and dive deep into personal passion projects. I've had a life-long love of emulation and deconstructing software, and it remains the center focus of many of my projects.",
+            "Over the past couple of years, I’ve taken a break from the corporate world to travel, reconnect with family, and dive deep into personal passion projects. I've had a life-long love of RPGs, emulation, and deconstructing software, and it remains the center focus of many of my projects.",
             "My most recent release is IdleQuest, a from-the-ground-up recreation of the 1999 classic, EverQuest. It features a custom real-time MMO server built in Go, a bespoke 3D renderer, and an authentic UI painstakingly crafted in React. I spent hundreds of hours meticulously scraping, cleaning, and organizing original data and graphics to recapture the original experience. You can play it at idlequest.net.",
-            "I'm currently looking for a new opportunity in Technical Project or Product Management. I'm based in the Bay Area and open to hybrid or remote roles. My resume and other projects are also all discoverable here!",
+            "I've also used my sabbatical time to launch a non-profit, whose main platform is Focus Tavern (focustavern.com). Its mission is to provide accessible tools and resources to individuals with attention and executive function challenges, empowering them to achieve their personal and professional goals through evidence-based productivity methods, education, and supportive community engagement.",
+            "I'm currently looking for a new opportunity in Technical Project or Product Management. I'm living in the Bay Area in California and open to hybrid or remote roles. My resume and other projects are also all discoverable here!",
           ],
         },
       },

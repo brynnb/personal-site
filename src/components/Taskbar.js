@@ -13,6 +13,22 @@ const StyledTaskBar = styled(TaskBar)`
     }
 `;
 
+const StyledIcon = styled.img`
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+`;
+
+const IconContainer = styled.div`
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -8px; /* Shift the icon container left */
+    margin-right: 8px; /* Give the text more space */
+`;
+
 
 
 
@@ -25,13 +41,21 @@ function Taskbar({ onClockClick }) {
                 list={
                     <List>
                         <List.Item
-                            icon={<Computer variant="32x32_4" />}
+                            icon={
+                                <IconContainer>
+                                    <StyledIcon src={`${process.env.PUBLIC_URL}/images/githubicon.png`} alt="GitHub" />
+                                </IconContainer>
+                            }
                             onClick={() => window.open("https://github.com/brynnb", "_blank")}
                         >
                             GitHub
                         </List.Item>
                         <List.Item
-                            icon={<Network2 variant="32x32_4" />}
+                            icon={
+                                <IconContainer>
+                                    <StyledIcon src={`${process.env.PUBLIC_URL}/images/linkedinicon.png`} alt="LinkedIn" />
+                                </IconContainer>
+                            }
                             onClick={() => window.open("https://www.linkedin.com/in/brynn-bateman/", "_blank")}
                         >
                             LinkedIn

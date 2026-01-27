@@ -5,6 +5,7 @@ import { Globe } from '@react95/icons';
 const Internet = ({ closeInternet }) => {
     return (
         <Modal
+            id="internet"
             icon={<Globe variant="16x16_4" />}
             title="The Internet"
             titleBarOptions={
@@ -32,4 +33,4 @@ const Internet = ({ closeInternet }) => {
     );
 };
 
-export default Internet;
+export default React.memo(Internet);

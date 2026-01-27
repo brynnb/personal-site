@@ -55,6 +55,7 @@ const HamsterDance = ({ closeHamsterDance }) => {
 
     return (
         <Modal
+            id="hamster"
             icon={<Network2 variant="16x16_4" />}
             title="Network Neighborhood"
             titleBarOptions={
@@ -96,4 +97,4 @@ const HamsterDance = ({ closeHamsterDance }) => {
     );
 };
 
-export default HamsterDance;
+export default React.memo(HamsterDance);

@@ -11,7 +11,7 @@ const FilesWrapper = styled.div`
 `;
 
 
-function Explorer({ items, closeExplorer, openNotepad, openFolder, isMobile, title = "Explorer - Brynn Bateman", id = "explorer", icon = "WindowsExplorer", style = {} }) {
+function Explorer({ items, closeExplorer, openNotepad, openFolder, isMobile, title = "Explorer - Brynn Bateman", id = "explorer", icon = "Folder", style = {} }) {
     const [activeFileSelection, setActiveFileSelection] = React.useState(null);
 
     const handleBackgroundClick = (e) => {
@@ -20,7 +20,7 @@ function Explorer({ items, closeExplorer, openNotepad, openFolder, isMobile, tit
         }
     };
 
-    const IconComponent = Icons[icon] || Icons.WindowsExplorer;
+    const IconComponent = Icons[icon] || Icons.Folder;
 
     return (
         <Modal
@@ -66,4 +66,4 @@ function Explorer({ items, closeExplorer, openNotepad, openFolder, isMobile, tit
     )
 }
 
-export default Explorer
+export default React.memo(Explorer);

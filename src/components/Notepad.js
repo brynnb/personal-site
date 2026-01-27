@@ -123,4 +123,4 @@ function Notepad({ closeNotepad, selectedItem, isMobile }) {
     )
 }
 
-export default Notepad
+export default React.memo(Notepad)
