@@ -148,7 +148,7 @@ const linkify = (text) => {
     // Match emails OR URLs
     // Group 1: Emails (to be ignored/text)
     // Group 2: URLs (to be linked)
-    const combinedRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})|(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9.-]+\.[a-z]{2,})/g;
+    const combinedRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})|(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9.-]+\.(?!txt)[a-z]{2,})/g;
 
     return text.split(combinedRegex).map((part, i) => {
         if (!part) return null;
@@ -172,7 +172,7 @@ const linkify = (text) => {
     });
 };
 
-function Notepad({ closeNotepad, selectedItem, isMobile, zIndex }) {
+function Notepad({ closeNotepad, selectedItem, isMobile, zIndex, style }) {
     const data = useContext(DataContext);
     const fullItem = data.getItem(selectedItem.id);
 
@@ -192,10 +192,6 @@ function Notepad({ closeNotepad, selectedItem, isMobile, zIndex }) {
                     : '';
             case 'contact':
                 return `CONTACT\n\nEmail: ${item.content.email || ''}\n\nSocial:\n${item.content.social ? item.content.social.map(s => `- ${s.name}: ${s.link}`).join('\n') : ''}`;
-            case 'projects':
-                return item.content.projects
-                    ? `PROJECTS\n\n${item.content.projects.map(p => `${p.title}\n${p.description}\nLink: ${p.repo}`).join('\n\n')}`
-                    : '';
             default:
                 const content = item.content.paragraph || item.content.paragraphs || '';
                 return Array.isArray(content) ? content.join('\n\n') : content;
@@ -215,7 +211,8 @@ function Notepad({ closeNotepad, selectedItem, isMobile, zIndex }) {
                 top: isMobile ? '3%' : '10%',
                 width: isMobile ? '90%' : 600,
                 height: isMobile ? '85vh' : (selectedItem.id === 'about' ? 800 : 600),
-                zIndex: zIndex
+                zIndex: zIndex,
+                ...style
             }}
             menu={[
                 { name: 'File', list: [] },

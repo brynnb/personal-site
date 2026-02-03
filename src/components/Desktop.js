@@ -43,6 +43,8 @@ function Desktop() {
     const [clockAlertOpened, toggleClockAlert] = useState(false);
     const [photoOpened, togglePhoto] = useState(false);
     const [defragOpened, toggleDefrag] = useState(false);
+    const [projectsOpened, toggleProjects] = useState(false);
+    const [projectsItem, setProjectsItem] = useState(null);
 
     const [zIndices, setZIndices] = useState({
         explorer: 10,
@@ -55,6 +57,7 @@ function Desktop() {
         hamsterDance: 17,
         photo: 18,
         defrag: 19,
+        projects: 20,
         clockAlert: 1000000
     });
 
@@ -103,6 +106,11 @@ function Desktop() {
             setMoreStuffItems(moreStuff);
             setSecretStuffItems(secretStuff);
 
+            const projectsFile = data.getItem('projects');
+            setProjectsItem(projectsFile);
+            toggleProjects(true);
+            bringToFront('projects');
+
             const aboutItem = data.getItem('about');
             setSelectedItem(aboutItem);
             toggleNotepad(true);
@@ -142,9 +150,14 @@ function Desktop() {
     }, []);
 
     const openNotepad = useCallback((item) => {
-        setSelectedItem(item)
-        toggleNotepad(true);
-        bringToFront('notepad');
+        if (item.id === 'projects') {
+            toggleProjects(true);
+            bringToFront('projects');
+        } else {
+            setSelectedItem(item)
+            toggleNotepad(true);
+            bringToFront('notepad');
+        }
     }, [bringToFront]);
 
     const openPaint = useCallback(() => {
@@ -306,6 +319,22 @@ function Desktop() {
                 notepadOpened && (
                     <div onMouseDown={() => bringToFront('notepad')}>
                         <Notepad closeNotepad={closeNotepad} selectedItem={selectedItem} isMobile={isMobile} zIndex={zIndices.notepad} />
+                    </div>
+                )
+            }
+            {
+                projectsOpened && (
+                    <div onMouseDown={() => bringToFront('projects')}>
+                        <Notepad
+                            closeNotepad={() => toggleProjects(false)}
+                            selectedItem={projectsItem}
+                            isMobile={isMobile}
+                            zIndex={zIndices.projects}
+                            style={{
+                                left: isMobile ? '100px' : 'calc(50% - 600px)',
+                                top: isMobile ? '15%' : 'calc(10% + 200px)',
+                            }}
+                        />
                     </div>
                 )
             }

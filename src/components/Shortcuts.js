@@ -152,6 +152,19 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
             </StyledShorcut>
 
             <StyledShorcut
+                isSelected={activeSelection === 'newyokosuka'}
+                onClick={(e) => handleIconClick('newyokosuka', () => window.open('https://www.newyokosuka.com/', '_blank'), e)}
+            >
+                <div className="icon-wrapper">
+                    <StyledIcon
+                        src={`${process.env.PUBLIC_URL}/images/ny.gif`}
+                        alt="New Yokosuka"
+                    />
+                </div>
+                <div className="shortcut-label">New Yokosuka</div>
+            </StyledShorcut>
+
+            <StyledShorcut
                 isSelected={activeSelection === 'media'}
                 onClick={(e) => handleIconClick('media', startWebamp, e)}
             >
@@ -182,6 +195,16 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
                     <Notepad2 variant="32x32_4" />
                 </div>
                 <div className="shortcut-label">About.txt</div>
+            </StyledShorcut>
+
+            <StyledShorcut
+                isSelected={activeSelection === 'projects'}
+                onClick={(e) => handleIconClick('projects', () => openNotepad({ id: 'projects', name: 'Projects.txt' }), e)}
+            >
+                <div className="icon-wrapper">
+                    <Notepad2 variant="32x32_4" />
+                </div>
+                <div className="shortcut-label">Projects.txt</div>
             </StyledShorcut>
         </div>
     )

@@ -11,9 +11,7 @@ export default class DataService {
         content: {
           paragraphs: [
             "Hi, I'm Brynn. I've been immersed in software for most of my life, starting at age 11 with Liberty BASIC. My early days were spent building GeoCities sites to host GameBoy emulators and Pokémon ROMs - a passion that eventually evolved into higher-stakes professional work. Throughout my career, I've had the opportunity to build solutions for high-profile clients like Amazon, Salesforce, NetSuite, Oracle, and Goodwill.",
-            "Over the past couple of years, I’ve taken a break from the corporate world to travel, reconnect with family, and dive deep into personal passion projects. I've had a life-long love of RPGs, emulation, and deconstructing software, and it remains the center focus of many of my projects.",
-            "My most recent release is IdleQuest, a from-the-ground-up recreation of the 1999 classic, EverQuest. It features a custom real-time MMO server built in Go, a bespoke 3D renderer, and an authentic UI painstakingly crafted in React. I spent hundreds of hours meticulously scraping, cleaning, and organizing original data and graphics to recapture the original experience. You can play it at idlequest.net.",
-            "I've also used my sabbatical time to launch a non-profit, whose main platform is Focus Tavern (focustavern.com). Its mission is to provide accessible tools and resources to individuals with attention and executive function challenges, empowering them to achieve their personal and professional goals through evidence-based productivity methods, education, and supportive community engagement.",
+            "Over the past couple of years, I’ve taken a break from the corporate world to travel, reconnect with family, and dive deep into personal passion projects. I've had a life-long love of RPGs, emulation, and deconstructing software, and it remains the center focus of many of my projects. Check out my Projects.txt!",
             "I'm currently looking for a new opportunity in Technical Project or Product Management. I'm living in the Bay Area in California and open to hybrid or remote roles. My resume and other projects are also all discoverable here:",
             "https://github.com/brynnb",
             "https://www.linkedin.com/in/brynn-bateman/",
@@ -58,14 +56,10 @@ export default class DataService {
         icon: 'flying_through_space_100',
         parentId: 'desktop',
         content: {
-          projects: [
-            {
-              title: 'My Portfolio Site',
-              description:
-                'My personal website in old-school Windows95 design.',
-              techStack: 'React',
-              repo: 'https://github.com/BrynnBateman/portfolio',
-            },
+          paragraphs: [
+            "My most recent release is IdleQuest, a from-the-ground-up recreation of the 1999 classic, EverQuest. It features a custom real-time MMO server built in Go, a bespoke 3D renderer, and an authentic UI painstakingly crafted in React. I spent hundreds of hours meticulously scraping, cleaning, and organizing original data and graphics to recapture the original experience. You can play it at idlequest.net.",
+            "I've also used my sabbatical time to launch a non-profit, whose main platform is Focus Tavern (focustavern.com). Its mission is to provide accessible tools and resources to individuals with attention and executive function challenges, empowering them to achieve their personal and professional goals through evidence-based productivity methods, education, and supportive community engagement.",
+            "Another fun project I've made is New Yokosuka (newyokosuka.com), which is a web-based asset viewer for the original Dreamcast version of Shenmue that renders binary models directly in your browser. It features custom-built parsers and a first-person navigation system, allowing for an immersive way to explore and research the game's iconic 3D environments.",
           ],
         },
       },
