@@ -57,9 +57,11 @@ export default class DataService {
         parentId: 'desktop',
         content: {
           paragraphs: [
-            "My most recent release is IdleQuest, a from-the-ground-up recreation of the 1999 classic, EverQuest. It features a custom real-time MMO server built in Go, a bespoke 3D renderer, and an authentic UI painstakingly crafted in React. I spent hundreds of hours meticulously scraping, cleaning, and organizing original data and graphics to recapture the original experience. You can play it at idlequest.net.",
-            "I've also used my sabbatical time to launch a non-profit, whose main platform is Focus Tavern (focustavern.com). Its mission is to provide accessible tools and resources to individuals with attention and executive function challenges, empowering them to achieve their personal and professional goals through evidence-based productivity methods, education, and supportive community engagement.",
-            "Another fun project I've made is New Yokosuka (newyokosuka.com), which is a web-based asset viewer for the original Dreamcast version of Shenmue that renders binary models directly in your browser. It features custom-built parsers and a first-person navigation system, allowing for an immersive way to explore and research the game's iconic 3D environments.",
+            "IdleQuest (idlequest.net) — A from-the-ground-up recreation of the 1999 classic, EverQuest. It features a custom real-time MMO server built in Go, a bespoke 3D renderer, and an authentic UI painstakingly crafted in React. I spent hundreds of hours meticulously scraping, cleaning, and organizing original data and graphics to recapture the original experience.",
+            "CaptureQuest (capturequest.net) — An expansive 2D multiplayer world built with the Phaser engine. Real-time world interaction, monster collection, and trainer battles, all running in the browser with a custom Go server backend.",
+            "New Yokosuka (newyokosuka.com) — A web-based asset viewer for the original Dreamcast version of Shenmue that renders binary MT5 models directly in your browser via Babylon.js. It features custom-built parsers and a first-person navigation system for exploring the game's iconic 3D environments.",
+            "Ghidra Dreamcast Shenmue (github.com/brynnb/ghidra-dreamcast-shenmue) — A custom Ghidra processor module and Python analysis pipeline for decompiling Shenmue's SCN3 bytecode, the stack-based scripting VM embedded in the original Dreamcast game. Achieved 98.6% clean decompilation across 5,278 functions.",
+            "Focus Tavern (focustavern.com) — A non-profit platform providing accessible tools and resources to individuals with attention and executive function challenges, empowering them through evidence-based productivity methods, education, and supportive community engagement.",
           ],
         },
       },
