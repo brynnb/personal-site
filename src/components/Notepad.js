@@ -192,6 +192,10 @@ function Notepad({ closeNotepad, selectedItem, isMobile, zIndex, style }) {
                     : '';
             case 'contact':
                 return `CONTACT\n\nEmail: ${item.content.email || ''}\n\nSocial:\n${item.content.social ? item.content.social.map(s => `- ${s.name}: ${s.link}`).join('\n') : ''}`;
+            case 'projects':
+                return item.content.projects
+                    ? item.content.projects.map(p => `${p.title}\n${p.description}`).join('\n\n')
+                    : '';
             default:
                 const content = item.content.paragraph || item.content.paragraphs || '';
                 return Array.isArray(content) ? content.join('\n\n') : content;
