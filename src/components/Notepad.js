@@ -148,7 +148,7 @@ const linkify = (text) => {
     // Match emails OR URLs
     // Group 1: Emails (to be ignored/text)
     // Group 2: URLs (to be linked)
-    const combinedRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})|(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9.-]+\.(?!txt)[a-z]{2,})/g;
+    const combinedRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})|(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9-]+\.(?:com|net|org|io|dev|co|me|info|xyz)[^\s]*)/g;
 
     return text.split(combinedRegex).map((part, i) => {
         if (!part) return null;
@@ -159,7 +159,7 @@ const linkify = (text) => {
         }
 
         // If it's a URL
-        if (part.match(/^(https?:\/\/|www\.|[a-zA-Z0-9.-]+\.[a-z]{2,})/)) {
+        if (part.match(/^(https?:\/\/|www\.|[a-zA-Z0-9-]+\.(?:com|net|org|io|dev|co|me|info|xyz))/)) {
             const url = part.startsWith('http') ? part : `http://${part}`;
             return (
                 <a key={i} href={url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
@@ -194,7 +194,12 @@ function Notepad({ closeNotepad, selectedItem, isMobile, zIndex, style }) {
                 return `CONTACT\n\nEmail: ${item.content.email || ''}\n\nSocial:\n${item.content.social ? item.content.social.map(s => `- ${s.name}: ${s.link}`).join('\n') : ''}`;
             case 'projects':
                 return item.content.projects
-                    ? item.content.projects.map(p => `${p.title}\n${p.description}`).join('\n\n')
+                    ? item.content.projects.map(p => {
+                        let text = `${p.title}\n${p.description}\nTech Stack: ${p.techStack || ''}`;
+                        if (p.url) text += `\nLink: ${p.url}`;
+                        if (p.repo) text += `\nGitHub: ${p.repo}`;
+                        return text;
+                    }).join('\n\n')
                     : '';
             default:
                 const content = item.content.paragraph || item.content.paragraphs || '';
