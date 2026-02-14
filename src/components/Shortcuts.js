@@ -152,6 +152,19 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
             </StyledShorcut>
 
             <StyledShorcut
+                isSelected={activeSelection === 'capturequest'}
+                onClick={(e) => handleIconClick('capturequest', () => window.open('https://capturequest.net', '_blank'), e)}
+            >
+                <div className="icon-wrapper">
+                    <StyledIcon
+                        src={`${process.env.PUBLIC_URL}/icons/capturequest.png`}
+                        alt="CaptureQuest"
+                    />
+                </div>
+                <div className="shortcut-label">CaptureQuest</div>
+            </StyledShorcut>
+
+            <StyledShorcut
                 isSelected={activeSelection === 'newyokosuka'}
                 onClick={(e) => handleIconClick('newyokosuka', () => window.open('https://www.newyokosuka.com/', '_blank'), e)}
             >

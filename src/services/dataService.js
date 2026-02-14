@@ -66,7 +66,7 @@ export default class DataService {
             },
             {
               title: "CaptureQuest",
-              description: "An expansive 2D multiplayer world built with the Phaser engine. Real-time world interaction, monster collection, and trainer battles, all running in the browser with a custom Go server backend.",
+              description: "An expansive 2D multiplayer world built with the Phaser engine. Real-time world interaction, monster collection, and trainer battles, all running in the browser with a custom Go server backend. Also includes a complete data extraction pipeline that parses original Game Boy Pokémon ROM assembly to pull out maps, sprites, encounters, and game logic for use in the web client.",
               techStack: "React, Phaser, Go, WebTransport, MySQL",
               url: "https://capturequest.net",
               repo: "https://github.com/brynnb/capture-quest",
