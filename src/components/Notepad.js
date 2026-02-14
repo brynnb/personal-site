@@ -195,9 +195,9 @@ function Notepad({ closeNotepad, selectedItem, isMobile, zIndex, style }) {
             case 'projects':
                 return item.content.projects
                     ? item.content.projects.map(p => {
-                        let text = `${p.title}\n${p.description}\nTech Stack: ${p.techStack || ''}`;
-                        if (p.url) text += `\nLink: ${p.url}`;
-                        if (p.repo) text += `\nGitHub: ${p.repo}`;
+                        let text = `${p.title}\n${p.description}`;
+                        if (p.url) text += `\n${p.url}`;
+                        else if (p.repo) text += `\n${p.repo}`;
                         return text;
                     }).join('\n\n')
                     : '';
