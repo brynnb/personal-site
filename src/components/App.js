@@ -32,6 +32,12 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: content-box !important;
   }
 
+  @media (max-width: 850px) {
+    .clippy, .clippy-balloon {
+      display: none !important;
+    }
+  }
+
   /* React95 TitleBar title text */
   .r95_1kpzw685 {
     line-height: 1.2em !important;

@@ -72,7 +72,7 @@ function Desktop() {
     }, []);
 
     useEffect(() => {
-        if (clippy) {
+        if (clippy && !isMobile) {
             clippy.show();
             clippy.animate();
 
@@ -92,7 +92,7 @@ function Desktop() {
                 clearInterval(interval);
             };
         }
-    }, [clippy]);
+    }, [clippy, isMobile]);
 
     useEffect(
         () => {
