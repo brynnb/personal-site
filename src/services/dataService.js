@@ -72,6 +72,13 @@ export default class DataService {
               repo: "https://github.com/brynnb/capture-quest",
             },
             {
+              title: "Focus Tavern",
+              description: "A non-profit platform providing accessible tools and resources to individuals with attention and executive function challenges, empowering them through evidence-based productivity methods, education, and supportive community engagement.",
+              techStack: "React, TypeScript, Node.js, PostgreSQL, Prisma",
+              url: "https://focustavern.com",
+              repo: "https://github.com/brynnb/focus-tavern",
+            },
+            {
               title: "New Yokosuka",
               description: "A web-based asset viewer for the original Dreamcast version of Shenmue that renders binary MT5 models directly in your browser via Babylon.js. It features custom-built parsers and a first-person navigation system for exploring the game's iconic 3D environments.",
               techStack: "Babylon.js, TypeScript, Python, Cloudflare R2",
@@ -83,13 +90,6 @@ export default class DataService {
               description: "A reverse engineering deep-dive into the 1999 Dreamcast classic Shenmue, using Ghidra, an open-source analysis tool created by the NSA. Built a custom processor module and automated pipeline that successfully decoded over 5,000 of the game's internal script functions. A rewarding exploration of low-level systems analysis and tool development.",
               techStack: "Ghidra, SLEIGH, Python, Java",
               repo: "https://github.com/brynnb/ghidra-dreamcast-shenmue",
-            },
-            {
-              title: "Focus Tavern",
-              description: "A non-profit platform providing accessible tools and resources to individuals with attention and executive function challenges, empowering them through evidence-based productivity methods, education, and supportive community engagement.",
-              techStack: "React, TypeScript, Node.js, PostgreSQL, Prisma",
-              url: "https://focustavern.com",
-              repo: "https://github.com/brynnb/focus-tavern",
             },
           ],
         },

@@ -15,6 +15,10 @@ const StyledTray = styled(Frame)`
     z-index: 999999;
     box-shadow: inset -1px -1px #ffffff, inset 1px 1px #808080;
     background-color: #c0c0c0;
+
+    @media (max-width: 500px) {
+        display: none;
+    }
 `;
 
 const IconWrapper = styled.div`

@@ -9,6 +9,10 @@ const TaskBarFrame = styled(Frame)`
     padding-right: 80px;
     z-index: 999999 !important;
 
+    @media (max-width: 500px) {
+        padding-right: 2px;
+    }
+
     /* Start Menu popup should be above all windows */
     & > div:first-child {
         z-index: 999999 !important;
@@ -92,6 +96,9 @@ const WindowTitle = styled.span`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+`;
+
+const WindowButtonsArea = styled(Frame)`
 `;
 
 
@@ -181,7 +188,7 @@ function Taskbar({ onClockClick }) {
                         Start
                     </StartButton>
 
-                    <Frame w="100%" paddingLeft="$0" ml="$2" display="flex">
+                    <WindowButtonsArea w="100%" paddingLeft="$0" ml="$2" display="flex">
                         {openWindows.map((win) => (
                             <WindowButton
                                 key={win.id}
@@ -196,7 +203,7 @@ function Taskbar({ onClockClick }) {
                                 <WindowTitle>{win.title}</WindowTitle>
                             </WindowButton>
                         ))}
-                    </Frame>
+                    </WindowButtonsArea>
                 </TaskBarFrame>
             </div>
             <Tray onClockClick={onClockClick} />
