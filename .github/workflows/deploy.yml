@@ -1,0 +1,45 @@
+name: Deploy Personal Site
+
+on:
+  push:
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to Server
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          SSH_OPTS="-o StrictHostKeyChecking=no -i ~/.ssh/deploy_key"
+          HOST="ubuntu@54.68.252.253"
+
+          # Create directory
+          ssh $SSH_OPTS $HOST "mkdir -p /home/ubuntu/app/personal-site/build"
+          
+          # Upload frontend
+          tar czf - -C build . | ssh $SSH_OPTS $HOST "cd /home/ubuntu/app/personal-site/build && tar xzf -"
+
+          rm -f ~/.ssh/deploy_key
