@@ -68,6 +68,7 @@ function Win95Window({
                 flexDirection: 'column',
                 top: '50px',
                 zIndex,
+                color: 'black',
                 ...style,
             }}
             onMouseDown={() => focusWindow(id)}

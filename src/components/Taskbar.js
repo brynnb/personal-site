@@ -59,6 +59,7 @@ const WindowButton = styled.button`
         ? 'inset 1px 1px #808080, inset -1px -1px #ffffff'
         : 'inset 1px 1px #ffffff, inset -1px -1px #808080'};
     font-weight: normal;
+    color: black;
 
     &:active {
         box-shadow: inset 1px 1px #808080, inset -1px -1px #ffffff;
@@ -80,6 +81,7 @@ const StartButton = styled.button`
     box-shadow: ${props => props.$active
         ? 'inset 1px 1px #808080, inset -1px -1px #ffffff'
         : 'inset 1px 1px #ffffff, inset -1px -1px #808080'};
+    color: black;
 
     &:active {
         box-shadow: inset 1px 1px #808080, inset -1px -1px #ffffff;

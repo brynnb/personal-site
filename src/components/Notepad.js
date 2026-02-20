@@ -13,6 +13,7 @@ const NotepadWrapper = styled.div`
             top: 0 !important;
             width: 100vw !important;
             height: calc(100vh - 28px) !important;
+            height: calc(100dvh - 28px) !important;
         }
     }
 `;
@@ -36,8 +37,10 @@ const StyledContent = styled.div`
     font-family: 'MS Sans Serif', 'Fixedsys', monospace;
     font-size: 14px;
     padding: 2px;
+    padding-bottom: 80px;
     background: white;
     user-select: text;
+    color: black;
 
     /* In WebKit browsers, use full width since fake scrollbar is hidden */
     @supports selector(::-webkit-scrollbar) {
