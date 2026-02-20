@@ -1,8 +1,21 @@
 import React, { useContext } from 'react'
-import { Modal, Frame, TitleBar } from '@react95/core'
+import { Frame } from '@react95/core'
 import { Notepad2 as NotepadIcon } from '@react95/icons'
 import styled from 'styled-components'
 import DataContext from '../contexts/dataContext'
+import Win95Window from './Win95Window'
+
+const NotepadWrapper = styled.div`
+    @media (max-width: 850px) {
+        /* On mobile, override Win95Window positioning to be fullscreen */
+        & > div {
+            left: 0 !important;
+            top: 0 !important;
+            width: 100vw !important;
+            height: calc(100vh - 28px) !important;
+        }
+    }
+`;
 
 const ContentWrapper = styled.div`
     flex: 1;
@@ -145,20 +158,15 @@ const FakeScrollbarCorner = styled.div`
 `;
 
 const linkify = (text) => {
-    // Match emails OR URLs
-    // Group 1: Emails (to be ignored/text)
-    // Group 2: URLs (to be linked)
     const combinedRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})|(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9-]+\.(?:com|net|org|io|dev|co|me|info|xyz)[^\s]*)/g;
 
     return text.split(combinedRegex).map((part, i) => {
         if (!part) return null;
 
-        // If it's an email (checked against the first part of the regex)
         if (part.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
             return part;
         }
 
-        // If it's a URL
         if (part.match(/^(https?:\/\/|www\.|[a-zA-Z0-9-]+\.(?:com|net|org|io|dev|co|me|info|xyz))/)) {
             const url = part.startsWith('http') ? part : `http://${part}`;
             return (
@@ -172,7 +180,9 @@ const linkify = (text) => {
     });
 };
 
-function Notepad({ closeNotepad, selectedItem, isMobile, zIndex, style }) {
+const NOTEPAD_ICON = <NotepadIcon variant="16x16_4" />;
+
+function Notepad({ id = "notepad", closeNotepad, selectedItem, style }) {
     const data = useContext(DataContext);
     const fullItem = data.getItem(selectedItem.id);
 
@@ -208,53 +218,53 @@ function Notepad({ closeNotepad, selectedItem, isMobile, zIndex, style }) {
     };
 
     return (
-        <Modal
-            id="notepad"
-            icon={<NotepadIcon variant="16x16_4" />}
-            title={`${selectedItem.name.replace('.txt', '')} - Notepad`}
-            titleBarOptions={
-                <TitleBar.Close onClick={closeNotepad} />
-            }
-            style={{
-                left: isMobile ? '5%' : 'calc(50% - 300px)',
-                top: isMobile ? '3%' : '10%',
-                width: isMobile ? '90%' : 600,
-                height: isMobile ? '85vh' : (selectedItem.id === 'about' ? 800 : 600),
-                zIndex: zIndex,
-                ...style
-            }}
-            menu={[
-                { name: 'File', list: [] },
-                { name: 'Edit', list: [] },
-                { name: 'Search', list: [] },
-                { name: 'Help', list: [] }
-            ]}>
-            <Frame
-                backgroundColor="$inputBackground"
-                boxShadow="$in"
-                h="100%"
-                padding="$2"
+        <NotepadWrapper>
+            <Win95Window
+                id={id}
+                icon={NOTEPAD_ICON}
+                title={`${selectedItem.name.replace('.txt', '')} - Notepad`}
+                onClose={closeNotepad}
                 style={{
-                    display: 'flex',
-                    flexDirection: 'column'
+                    left: 'calc(50% - 300px)',
+                    top: '10%',
+                    width: 600,
+                    height: selectedItem.id === 'about' ? 450 : 600,
+                    ...style
                 }}
+                menu={[
+                    { name: 'File', list: null },
+                    { name: 'Edit', list: null },
+                    { name: 'Search', list: null },
+                    { name: 'Help', list: null }
+                ]}
             >
-                <ContentWrapper>
-                    <StyledContent>
-                        {linkify(getContent(fullItem))}
-                    </StyledContent>
-                    <FakeVerticalScrollbar>
-                        <UpArrow />
-                        <DownArrow />
-                    </FakeVerticalScrollbar>
-                    <FakeHorizontalScrollbar>
-                        <LeftArrow />
-                        <RightArrow />
-                    </FakeHorizontalScrollbar>
-                    <FakeScrollbarCorner />
-                </ContentWrapper>
-            </Frame>
-        </Modal >
+                <Frame
+                    backgroundColor="$inputBackground"
+                    boxShadow="$in"
+                    h="100%"
+                    padding="$2"
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}
+                >
+                    <ContentWrapper>
+                        <StyledContent>
+                            {linkify(getContent(fullItem))}
+                        </StyledContent>
+                        <FakeVerticalScrollbar>
+                            <UpArrow />
+                            <DownArrow />
+                        </FakeVerticalScrollbar>
+                        <FakeHorizontalScrollbar>
+                            <LeftArrow />
+                            <RightArrow />
+                        </FakeHorizontalScrollbar>
+                        <FakeScrollbarCorner />
+                    </ContentWrapper>
+                </Frame>
+            </Win95Window>
+        </NotepadWrapper>
     )
 }
 

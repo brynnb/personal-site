@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Modal, Frame, TitleBar } from '@react95/core'
+import { Frame } from '@react95/core'
 import * as Icons from '@react95/icons'
 import Item from './Item'
+import Win95Window from './Win95Window'
 
 const FilesWrapper = styled.div`
 	display: flex;
@@ -20,16 +21,17 @@ function Explorer({ items, closeExplorer, openNotepad, openFolder, isMobile, tit
         }
     };
 
-    const IconComponent = Icons[icon] || Icons.Folder;
+    const memoizedIcon = React.useMemo(() => {
+        const IconComponent = Icons[icon] || Icons.Folder;
+        return <IconComponent variant="16x16_4" />;
+    }, [icon]);
 
     return (
-        <Modal
+        <Win95Window
             id={id}
-            icon={<IconComponent variant="16x16_4" />}
+            icon={memoizedIcon}
             title={title}
-            titleBarOptions={
-                <TitleBar.Close onClick={closeExplorer} />
-            }
+            onClose={closeExplorer}
             style={{
                 left: isMobile ? '5%' : '15%',
                 top: '20%',
@@ -38,10 +40,12 @@ function Explorer({ items, closeExplorer, openNotepad, openFolder, isMobile, tit
                 ...style
             }}
             menu={[
-                { name: 'File', list: [] },
-                { name: 'Edit', list: [] },
-                { name: 'Help', list: [] },
-            ]}>
+                { name: 'File', list: null },
+                { name: 'Edit', list: null },
+                { name: 'Help', list: null },
+            ]}
+            isMobile={isMobile}
+        >
             <Frame
                 backgroundColor="$inputBackground"
                 boxShadow="$in"
@@ -62,7 +66,7 @@ function Explorer({ items, closeExplorer, openNotepad, openFolder, isMobile, tit
                     }
                 </FilesWrapper>
             </Frame>
-        </Modal>
+        </Win95Window>
     )
 }
 

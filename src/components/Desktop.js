@@ -8,10 +8,12 @@ import Paint from './Paint';
 import Internet from './Internet';
 import HamsterDance from './HamsterDance';
 import Taskbar from './Taskbar';
-import { Alert, TitleBar, Modal } from '@react95/core';
+import { Alert, TitleBar } from '@react95/core';
 import { Wangimg130 } from '@react95/icons';
 import { useClippy } from '@react95/clippy';
 import Defrag from './Defrag';
+import { useWindowManager } from '../contexts/windowContext';
+import Win95Window from './Win95Window';
 
 const funnyLines = [
     "bill gates tells me to burn things",
@@ -21,11 +23,15 @@ const funnyLines = [
     "this website is perfectly cromulent"
 ];
 
+const PHOTO_ICON = <Wangimg130 variant="16x16_4" />;
+
 function Desktop() {
     const isMobile = window.innerWidth < 850;
 
     const data = useContext(DataContext);
     const { clippy } = useClippy();
+    const { focusWindow } = useWindowManager();
+
     const [explorerOpened, toggleExplorer] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const [notepadOpened, toggleNotepad] = useState(false);
@@ -46,31 +52,6 @@ function Desktop() {
     const [projectsOpened, toggleProjects] = useState(false);
     const [projectsItem, setProjectsItem] = useState(null);
 
-    const [zIndices, setZIndices] = useState({
-        explorer: 10,
-        moreStuff: 11,
-        secretStuff: 12,
-        recycleBin: 13,
-        notepad: 14,
-        paint: 15,
-        internet: 16,
-        hamsterDance: 17,
-        photo: 18,
-        defrag: 19,
-        projects: 20,
-        clockAlert: 1000000
-    });
-
-    const bringToFront = useCallback((id) => {
-        setZIndices(prev => {
-            const maxZ = Math.max(...Object.values(prev).filter(z => z < 1000000));
-            return {
-                ...prev,
-                [id]: maxZ + 1
-            };
-        });
-    }, []);
-
     useEffect(() => {
         if (clippy && !isMobile) {
             clippy.show();
@@ -79,7 +60,7 @@ function Desktop() {
             let index = 0;
             const initialDelay = setTimeout(() => {
                 clippy.speak(funnyLines[index]);
-            }, 1000); // Wait 1s for positioning
+            }, 1000);
 
             const interval = setInterval(() => {
                 index = (index + 1) % funnyLines.length;
@@ -109,13 +90,11 @@ function Desktop() {
             const projectsFile = data.getItem('projects');
             setProjectsItem(projectsFile);
             toggleProjects(true);
-            bringToFront('projects');
 
             const aboutItem = data.getItem('about');
             setSelectedItem(aboutItem);
             toggleNotepad(true);
-            bringToFront('notepad');
-        }, [data, bringToFront]);
+        }, [data]);
 
 
     const closeExplorer = useCallback(() => {
@@ -124,24 +103,24 @@ function Desktop() {
 
     const openExplorer = useCallback(() => {
         toggleExplorer(true);
-        bringToFront('explorer');
-    }, [bringToFront]);
+        focusWindow('explorer');
+    }, [focusWindow]);
 
     const closeMoreStuff = useCallback(() => toggleMoreStuff(false), []);
     const closeSecretStuff = useCallback(() => toggleSecretStuff(false), []);
     const openDefrag = useCallback(() => {
         toggleDefrag(true);
-        bringToFront('defrag');
-    }, [bringToFront]);
+        focusWindow('defrag');
+    }, [focusWindow]);
     const closeDefrag = useCallback(() => toggleDefrag(false), []);
 
     const openFolder = (item) => {
         if (item.id === 'more-stuff') {
             toggleMoreStuff(true);
-            bringToFront('moreStuff');
+            focusWindow('more-stuff');
         } else if (item.id === 'secret-stuff') {
             toggleSecretStuff(true);
-            bringToFront('secretStuff');
+            focusWindow('secret-stuff');
         }
     }
 
@@ -152,18 +131,18 @@ function Desktop() {
     const openNotepad = useCallback((item) => {
         if (item.id === 'projects') {
             toggleProjects(true);
-            bringToFront('projects');
+            focusWindow('projects');
         } else {
             setSelectedItem(item)
             toggleNotepad(true);
-            bringToFront('notepad');
+            focusWindow('notepad');
         }
-    }, [bringToFront]);
+    }, [focusWindow]);
 
     const openPaint = useCallback(() => {
         togglePaint(true);
-        bringToFront('paint');
-    }, [bringToFront]);
+        focusWindow('paint');
+    }, [focusWindow]);
 
     const closePaint = useCallback(() => {
         togglePaint(false);
@@ -171,8 +150,8 @@ function Desktop() {
 
     const openRecycleBin = useCallback(() => {
         toggleRecycleBin(true);
-        bringToFront('recycleBin');
-    }, [bringToFront]);
+        focusWindow('recycle-bin');
+    }, [focusWindow]);
 
     const closeRecycleBin = useCallback(() => {
         toggleRecycleBin(false);
@@ -180,8 +159,8 @@ function Desktop() {
 
     const openInternet = useCallback(() => {
         toggleInternet(true);
-        bringToFront('internet');
-    }, [bringToFront]);
+        focusWindow('internet');
+    }, [focusWindow]);
 
     const closeInternet = useCallback(() => {
         toggleInternet(false);
@@ -189,8 +168,8 @@ function Desktop() {
 
     const openHamsterDance = useCallback(() => {
         toggleHamsterDance(true);
-        bringToFront('hamsterDance');
-    }, [bringToFront]);
+        focusWindow('hamster');
+    }, [focusWindow]);
 
     const closeHamsterDance = useCallback(() => {
         toggleHamsterDance(false);
@@ -201,12 +180,11 @@ function Desktop() {
 
     const openPhoto = useCallback(() => {
         togglePhoto(true);
-        bringToFront('photo');
-    }, [bringToFront]);
+        focusWindow('photo');
+    }, [focusWindow]);
     const closePhoto = useCallback(() => togglePhoto(false), []);
 
     const handleBackgroundClick = useCallback((e) => {
-        // Only deselect if we click the actual desktop background
         if (e.target === e.currentTarget) {
             setActiveSelection(null);
         }
@@ -249,9 +227,7 @@ function Desktop() {
                         style={{
                             left: isMobile ? '5%' : '10%',
                             top: isMobile ? '10%' : '15%',
-                            zIndex: zIndices.explorer
                         }}
-                        onMouseDown={() => bringToFront('explorer')}
                     />
                 )
             }
@@ -269,9 +245,7 @@ function Desktop() {
                         style={{
                             left: isMobile ? '5%' : '20%',
                             top: '25%',
-                            zIndex: zIndices.moreStuff
                         }}
-                        onMouseDown={() => bringToFront('moreStuff')}
                     />
                 )
             }
@@ -289,9 +263,7 @@ function Desktop() {
                         style={{
                             left: isMobile ? '5%' : '25%',
                             top: '30%',
-                            zIndex: zIndices.secretStuff
                         }}
-                        onMouseDown={() => bringToFront('secretStuff')}
                     />
                 )
             }
@@ -309,54 +281,41 @@ function Desktop() {
                         style={{
                             left: isMobile ? '5%' : '15%',
                             top: isMobile ? '15%' : '20%',
-                            zIndex: zIndices.recycleBin
                         }}
-                        onMouseDown={() => bringToFront('recycleBin')}
+                    />
+                )
+            }
+            {
+                projectsOpened && (
+                    <Notepad
+                        id="projects"
+                        closeNotepad={() => toggleProjects(false)}
+                        selectedItem={projectsItem}
+                        style={{
+                            left: isMobile ? '100px' : 'calc(50% - 600px)',
+                            top: isMobile ? '15%' : 'calc(10% + 200px)',
+                        }}
                     />
                 )
             }
             {
                 notepadOpened && (
-                    <div onMouseDown={() => bringToFront('notepad')}>
-                        <Notepad closeNotepad={closeNotepad} selectedItem={selectedItem} isMobile={isMobile} zIndex={zIndices.notepad} />
-                    </div>
-                )
-            }
-            {
-                projectsOpened && (
-                    <div onMouseDown={() => bringToFront('projects')}>
-                        <Notepad
-                            closeNotepad={() => toggleProjects(false)}
-                            selectedItem={projectsItem}
-                            isMobile={isMobile}
-                            zIndex={zIndices.projects}
-                            style={{
-                                left: isMobile ? '100px' : 'calc(50% - 600px)',
-                                top: isMobile ? '15%' : 'calc(10% + 200px)',
-                            }}
-                        />
-                    </div>
+                    <Notepad id="notepad" closeNotepad={closeNotepad} selectedItem={selectedItem} />
                 )
             }
             {
                 paintOpened && (
-                    <div onMouseDown={() => bringToFront('paint')}>
-                        <Paint closePaint={closePaint} zIndex={zIndices.paint} />
-                    </div>
+                    <Paint closePaint={closePaint} />
                 )
             }
             {
                 internetOpened && (
-                    <div onMouseDown={() => bringToFront('internet')}>
-                        <Internet closeInternet={closeInternet} zIndex={zIndices.internet} />
-                    </div>
+                    <Internet closeInternet={closeInternet} />
                 )
             }
             {
                 hamsterDanceOpened && (
-                    <div onMouseDown={() => bringToFront('hamsterDance')}>
-                        <HamsterDance closeHamsterDance={closeHamsterDance} zIndex={zIndices.hamsterDance} />
-                    </div>
+                    <HamsterDance closeHamsterDance={closeHamsterDance} />
                 )
             }
             {
@@ -386,13 +345,11 @@ function Desktop() {
             }
             {
                 photoOpened && (
-                    <Modal
+                    <Win95Window
                         id="photo"
-                        icon={<Wangimg130 variant="16x16_4" />}
+                        icon={PHOTO_ICON}
                         title="hi-res-travel-photo.jpg"
-                        titleBarOptions={
-                            <TitleBar.Close onClick={closePhoto} />
-                        }
+                        onClose={closePhoto}
                         style={{
                             width: 'auto',
                             maxWidth: '90vw',
@@ -401,10 +358,8 @@ function Desktop() {
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            zIndex: zIndices.photo,
                             userSelect: 'none'
                         }}
-                        onMouseDown={() => bringToFront('photo')}
                     >
                         <div style={{ padding: '10px', display: 'flex', justifyContent: 'center', backgroundColor: '#c0c0c0', userSelect: 'none' }}>
                             {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
@@ -414,14 +369,12 @@ function Desktop() {
                                 style={{ maxWidth: '100%', height: 'auto', imageRendering: 'pixelated' }}
                             />
                         </div>
-                    </Modal>
+                    </Win95Window>
                 )
             }
             {
                 defragOpened && (
-                    <div onMouseDown={() => bringToFront('defrag')}>
-                        <Defrag closeDefrag={closeDefrag} zIndex={zIndices.defrag} />
-                    </div>
+                    <Defrag closeDefrag={closeDefrag} />
                 )
             }
             <Player />

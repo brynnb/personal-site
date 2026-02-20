@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback, memo } from 'react';
 import styled from 'styled-components';
-import { Modal, TitleBar, Button, Frame, ProgressBar } from '@react95/core';
+import { Frame, Button, ProgressBar } from '@react95/core';
 import { Computer } from '@react95/icons';
+import Win95Window from './Win95Window';
 
 const DefragGrid = styled.div`
   display: grid;
@@ -38,16 +39,14 @@ const LegendColor = styled.div`
 
 const COLORS = {
     EMPTY: '#ffffff',
-    CONTIGUOUS: '#0000ff', // Blue
-    FRAGMENTED: '#ff0000', // Red
-    READING: '#ffff00',    // Yellow
-    OPTIMIZED: '#13fafb',  // Cyan/Light Blue
-    UNMOVABLE: '#808080',  // Gray
-    SYSTEM: '#000080',     // Dark Blue
+    CONTIGUOUS: '#0000ff',
+    FRAGMENTED: '#ff0000',
+    READING: '#ffff00',
+    OPTIMIZED: '#13fafb',
+    UNMOVABLE: '#808080',
+    SYSTEM: '#000080',
 };
 
-// Sub-component to handle the actual simulation logic 
-// this keeps the Modal component from re-rendering its wrapper unnecessarily
 const DefragContent = memo(({ isPaused, setIsPaused, closeDefrag }) => {
     const [blocks, setBlocks] = useState([]);
     const [progress, setProgress] = useState(0);
@@ -158,24 +157,23 @@ const DefragContent = memo(({ isPaused, setIsPaused, closeDefrag }) => {
     );
 });
 
-const Defrag = ({ closeDefrag, zIndex }) => {
+const DEFRAG_ICON = <Computer variant="16x16_4" />;
+
+const Defrag = ({ closeDefrag }) => {
     const [isPaused, setIsPaused] = useState(false);
 
     return (
-        <Modal
+        <Win95Window
             id="defrag"
-            icon={<Computer variant="16x16_4" />}
+            icon={DEFRAG_ICON}
             title="Defragmenting Drive C"
-            titleBarOptions={
-                <TitleBar.Close onClick={closeDefrag} />
-            }
+            onClose={closeDefrag}
             style={{
                 width: '350px',
                 position: 'fixed',
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
-                zIndex: zIndex
             }}
         >
             <DefragContent
@@ -183,7 +181,7 @@ const Defrag = ({ closeDefrag, zIndex }) => {
                 setIsPaused={setIsPaused}
                 closeDefrag={closeDefrag}
             />
-        </Modal>
+        </Win95Window>
     );
 };
 

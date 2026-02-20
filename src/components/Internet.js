@@ -1,16 +1,16 @@
 import React from 'react';
-import { Modal, TitleBar } from '@react95/core';
 import { Globe } from '@react95/icons';
+import Win95Window from './Win95Window';
 
-const Internet = ({ closeInternet, zIndex }) => {
+const GLOBE_ICON = <Globe variant="16x16_4" />;
+
+const Internet = ({ closeInternet }) => {
     return (
-        <Modal
+        <Win95Window
             id="internet"
-            icon={<Globe variant="16x16_4" />}
+            icon={GLOBE_ICON}
             title="The Internet"
-            titleBarOptions={
-                <TitleBar.Close onClick={closeInternet} />
-            }
+            onClose={closeInternet}
             style={{
                 width: '300px',
                 height: 'auto',
@@ -18,7 +18,6 @@ const Internet = ({ closeInternet, zIndex }) => {
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
-                zIndex: zIndex,
                 userSelect: 'none'
             }}
         >
@@ -29,7 +28,7 @@ const Internet = ({ closeInternet, zIndex }) => {
                     style={{ maxWidth: '100%', height: 'auto' }}
                 />
             </div>
-        </Modal>
+        </Win95Window>
     );
 };
 

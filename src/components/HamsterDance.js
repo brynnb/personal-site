@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { Modal, TitleBar } from '@react95/core';
 import { Network2, Sndvol32303, Sndrec3210 } from '@react95/icons';
 import styled from 'styled-components';
+import Win95Window from './Win95Window';
 
 const HamsterWrapper = styled.div`
     width: 100%;
@@ -39,7 +39,9 @@ const AudioControl = styled.div`
     justify-content: center;
 `;
 
-const HamsterDance = ({ closeHamsterDance, zIndex }) => {
+const HAMSTER_ICON = <Network2 variant="16x16_4" />;
+
+const HamsterDance = ({ closeHamsterDance }) => {
     const [isMuted, setIsMuted] = useState(true);
     const audioRef = useRef(null);
 
@@ -54,13 +56,11 @@ const HamsterDance = ({ closeHamsterDance, zIndex }) => {
     };
 
     return (
-        <Modal
+        <Win95Window
             id="hamster"
-            icon={<Network2 variant="16x16_4" />}
+            icon={HAMSTER_ICON}
             title="Network Neighborhood"
-            titleBarOptions={
-                <TitleBar.Close onClick={closeHamsterDance} />
-            }
+            onClose={closeHamsterDance}
             style={{
                 width: '450px',
                 height: 'auto',
@@ -68,7 +68,6 @@ const HamsterDance = ({ closeHamsterDance, zIndex }) => {
                 top: '40%',
                 left: '45%',
                 transform: 'translate(-50%, -50%)',
-                zIndex: zIndex,
                 userSelect: 'none'
             }}
         >
@@ -93,7 +92,7 @@ const HamsterDance = ({ closeHamsterDance, zIndex }) => {
                     muted={isMuted}
                 />
             </HamsterWrapper>
-        </Modal>
+        </Win95Window>
     );
 };
 

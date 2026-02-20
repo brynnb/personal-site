@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Modal, Frame, TitleBar, Alert } from "@react95/core";
+import { Frame, Alert, TitleBar } from "@react95/core";
 import { Mspaint } from "@react95/icons";
+import Win95Window from './Win95Window';
 
-function Paint({ closePaint, zIndex }) {
+const PAINT_ICON = <Mspaint variant="16x16_4" />;
+
+function Paint({ closePaint }) {
     const [showAlert, setShowAlert] = useState(false);
     const [showModal, setShowModal] = useState(true);
     const windowWidth = useRef(window.innerWidth);
@@ -19,7 +22,7 @@ function Paint({ closePaint, zIndex }) {
             }
         };
 
-        handleResize(); // Check initial size
+        handleResize();
         window.addEventListener("resize", handleResize);
 
         return () => {
@@ -51,14 +54,11 @@ function Paint({ closePaint, zIndex }) {
                 />
             )}
             {showModal && (
-                <Modal
+                <Win95Window
                     id="paint"
-                    icon={<Mspaint variant="16x16_4" />}
-                    title={"Paint"}
-                    titleBarOptions={[
-                        <Modal.Minimize key="minimize" />,
-                        <TitleBar.Close onClick={closePaint} key="close" />,
-                    ]}
+                    icon={PAINT_ICON}
+                    title="Paint"
+                    onClose={closePaint}
                     style={{
                         width: "100%",
                         height: "100%",
@@ -66,7 +66,6 @@ function Paint({ closePaint, zIndex }) {
                         maxHeight: '100vh',
                         top: 0,
                         left: 0,
-                        zIndex: zIndex
                     }}
                 >
                     <Frame style={{ padding: 0, width: "100%", height: "100%", border: 'none' }}>
@@ -80,7 +79,7 @@ function Paint({ closePaint, zIndex }) {
                             }}
                         ></iframe>
                     </Frame>
-                </Modal>
+                </Win95Window>
             )}
         </>
     );

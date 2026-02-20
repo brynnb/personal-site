@@ -6,6 +6,7 @@ import { ClippyProvider } from '@react95/clippy';
 import { Cursor } from '@react95/core';
 import DataService from '../services/dataService';
 import DataContext from '../contexts/dataContext';
+import { WindowProvider } from '../contexts/windowContext';
 import Desktop from './Desktop';
 
 const dataService = new DataService();
@@ -54,8 +55,10 @@ const GlobalStyles = createGlobalStyle`
 const App = () => (
   <DataContext.Provider value={dataService}>
     <ClippyProvider>
-      <GlobalStyles />
-      <Desktop />
+      <WindowProvider>
+        <GlobalStyles />
+        <Desktop />
+      </WindowProvider>
     </ClippyProvider>
   </DataContext.Provider>
 );
