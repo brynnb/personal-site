@@ -139,19 +139,6 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
             </StyledShorcut>
 
             <StyledShorcut
-                isSelected={activeSelection === 'focustavern'}
-                onClick={(e) => handleIconClick('focustavern', () => window.open('https://focustavern.com', '_blank'), e)}
-            >
-                <div className="icon-wrapper">
-                    <StyledIcon
-                        src={`${process.env.PUBLIC_URL}/icons/focustavern_retro.png`}
-                        alt="Focus Tavern"
-                    />
-                </div>
-                <div className="shortcut-label">Focus Tavern</div>
-            </StyledShorcut>
-
-            <StyledShorcut
                 isSelected={activeSelection === 'capturequest'}
                 onClick={(e) => handleIconClick('capturequest', () => window.open('https://capturequest.net', '_blank'), e)}
             >
@@ -218,6 +205,19 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
                     <Notepad2 variant="32x32_4" />
                 </div>
                 <div className="shortcut-label">Projects.txt</div>
+            </StyledShorcut>
+
+            <StyledShorcut
+                isSelected={activeSelection === 'vanguard'}
+                onClick={(e) => handleIconClick('vanguard', () => window.open('https://www.eternalsagas.com/', '_blank'), e)}
+            >
+                <div className="icon-wrapper">
+                    <StyledIcon
+                        src={`${process.env.PUBLIC_URL}/icons/vanguard.png`}
+                        alt="Vanguard: Eternal Sagas"
+                    />
+                </div>
+                <div className="shortcut-label">Vanguard: Eternal Sagas</div>
             </StyledShorcut>
         </div>
     )

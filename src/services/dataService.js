@@ -58,6 +58,13 @@ export default class DataService {
         content: {
           projects: [
             {
+              title: "Vanguard: Eternal Sagas",
+              description: "A reverse-engineering and reimplementation of Vanguard: Saga of Heroes, an MMORPG from 2007 that was ultimately shut down in 2014. Built an extensive custom binary asset extractor that decodes the game's proprietary terrain, mesh, audio, and texture formats, then streams them live into a browser-based game engine. With reverse engineering 95% complete and nearly all assets extracted, work continues on its integration into a playable world!",
+              techStack: "Babylon.js, React, Python, Cloudflare R2",
+              url: "https://www.eternalsagas.com/",
+              repo: "https://github.com/brynnb/vanguard-saga-of-heroes-asset-extractor",
+            },
+            {
               title: "IdleQuest",
               description: "A from-the-ground-up recreation of the 1999 classic, EverQuest. It features a custom real-time MMO server built in Go, a bespoke 3D renderer, and an authentic UI painstakingly crafted in React. I spent hundreds of hours meticulously scraping, cleaning, and organizing original data and graphics to recapture the original experience.",
               techStack: "React, Go, WebSockets, MySQL",
