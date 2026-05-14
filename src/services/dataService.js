@@ -12,7 +12,7 @@ export default class DataService {
           paragraphs: [
             "Hi, I'm Brynn. I've been immersed in software for most of my life, starting at age 11 with Liberty BASIC. My early days were spent building GeoCities sites to host GameBoy emulators and Pokémon ROMs - a passion that eventually evolved into higher-stakes professional work. Throughout my career, I've had the opportunity to build solutions for high-profile clients like Amazon, Salesforce, NetSuite, Oracle, and Goodwill.",
             "Over the past couple of years, I’ve taken a break from the corporate world to travel, reconnect with family, and dive deep into personal passion projects. I've had a life-long love of RPGs, emulation, and deconstructing software, and it remains the center focus of many of my projects. Check out my Projects.txt!",
-            "I'm currently looking for a new opportunity in Technical Project or Product Management. I'm living in the Bay Area in California and open to hybrid or remote roles. My resume and other projects are also all discoverable here:",
+            "I'm currently looking for a new opportunity in Technical Project or Product Management. I'm living in the Bay Area in California and open to in-person, hybrid, or remote roles. My resume and other projects are also all discoverable here:",
             "https://github.com/brynnb",
             "https://www.linkedin.com/in/brynn-bateman/",
             "contact2026@brynnbateman.com",
