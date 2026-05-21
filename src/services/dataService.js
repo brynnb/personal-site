@@ -59,7 +59,7 @@ export default class DataService {
           projects: [
             {
               title: "Vanguard: Eternal Sagas",
-              description: "A reverse-engineering and reimplementation of Vanguard: Saga of Heroes, an MMORPG from 2007 that was ultimately shut down in 2014. Built an extensive custom binary asset extractor that decodes the game's proprietary terrain, mesh, audio, and texture formats, then streams them live into a browser-based game engine. With reverse engineering 95% complete and nearly all assets extracted, work continues on its integration into a playable world!",
+              description: "A reverse-engineering and reimplementation of Vanguard: Saga of Heroes, an MMORPG from 2007 that was ultimately shut down in 2014. Built an extensive custom binary asset extractor that decodes the game's proprietary terrain, mesh, audio, texture, and data formats, then streams them live into both web-based and desktop game engines. With reverse engineering 95% complete and nearly all assets extracted, work continues on its integration into a playable world!",
               techStack: "Babylon.js, React, Python, Cloudflare R2",
               url: "https://www.eternalsagas.com/",
               repo: "https://github.com/brynnb/vanguard-saga-of-heroes-asset-extractor",

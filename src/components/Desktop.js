@@ -16,10 +16,7 @@ import { useWindowManager } from '../contexts/windowContext';
 import Win95Window from './Win95Window';
 
 const funnyLines = [
-    "bill gates tells me to burn things",
-    "i for one welcome our new microsoft overlords.",
     "everything's coming up clippy!",
-    "working on a portfolio? that's a paddlin'.",
     "this website is perfectly cromulent"
 ];
 
@@ -54,23 +51,25 @@ function Desktop() {
 
     useEffect(() => {
         if (clippy && !isMobile) {
-            clippy.show();
             clippy.animate();
+            clippy.delay(3000);
 
-            let index = 0;
-            const initialDelay = setTimeout(() => {
-                clippy.speak(funnyLines[index]);
-            }, 1000);
+            
+            clippy.speak(funnyLines[0]);
+            clippy.delay(3000);
 
-            const interval = setInterval(() => {
-                index = (index + 1) % funnyLines.length;
-                clippy.speak(funnyLines[index]);
-                clippy.animate();
-            }, 30000);
+            const leaveAnimation = clippy.hasAnimation('GoodBye')
+                ? 'GoodBye'
+                : clippy.hasAnimation('Goodbye')
+                    ? 'Goodbye'
+                    : 'Hide';
+
+            clippy.play(leaveAnimation, 5000, () => {
+                clippy.hide(true, () => {});
+            });
 
             return () => {
-                clearTimeout(initialDelay);
-                clearInterval(interval);
+                clippy.stop();
             };
         }
     }, [clippy, isMobile]);
