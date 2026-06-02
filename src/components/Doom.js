@@ -14,7 +14,7 @@ const Doom = ({ closeDoom, isMobile }) => (
         id="doom"
         title="DOOM.exe"
         icon={DOOM_ICON}
-        src={`${process.env.PUBLIC_URL}/games/doom/`}
+        src={`${process.env.PUBLIC_URL}/games/doom/index.html`}
         onClose={closeDoom}
         isMobile={isMobile}
     />

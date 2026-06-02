@@ -14,7 +14,7 @@ const ChexQuest = ({ closeChexQuest, isMobile }) => (
         id="chex-quest"
         title="Chex Quest.exe"
         icon={CHEX_ICON}
-        src={`${process.env.PUBLIC_URL}/games/chex/`}
+        src={`${process.env.PUBLIC_URL}/games/chex/index.html`}
         onClose={closeChexQuest}
         isMobile={isMobile}
     />

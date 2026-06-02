@@ -11,9 +11,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .env
-
-# Local game data for intranet-only Doom-engine windows.
-public/games/**/*.wad
-public/games/**/*.WAD
-public/games/**/*.iwad
-public/games/**/*.IWAD
