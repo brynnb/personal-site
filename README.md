@@ -5,3 +5,5 @@ Brynn's personal website in old-school Windows 95 style.
 * Website built with [React95](https://github.com/React95/React95)
 * Winamp player in web [Webamp](https://github.com/captbaritone/webamp)
 * Classic MS Paint remake [JS Paint](https://github.com/1j01/jspaint)
+* Doom window powered by [EmulatorJS](https://emulatorjs.org/)
+* DOOM1.WAD is the Doom shareware v1.9 IWAD

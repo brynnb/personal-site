@@ -7,6 +7,8 @@ import Player from './Player';
 import Paint from './Paint';
 import Internet from './Internet';
 import HamsterDance from './HamsterDance';
+import Doom from './Doom';
+import ChexQuest from './ChexQuest';
 import Taskbar from './Taskbar';
 import { Alert, TitleBar } from '@react95/core';
 import { Wangimg130 } from '@react95/icons';
@@ -34,6 +36,8 @@ function Desktop() {
     const [notepadOpened, toggleNotepad] = useState(false);
     const [paintOpened, togglePaint] = useState(false);
     const [internetOpened, toggleInternet] = useState(false);
+    const [doomOpened, toggleDoom] = useState(false);
+    const [chexQuestOpened, toggleChexQuest] = useState(false);
     const [hamsterDanceOpened, toggleHamsterDance] = useState(false);
     const [recycleBinOpened, toggleRecycleBin] = useState(false);
     const [moreStuffOpened, toggleMoreStuff] = useState(false);
@@ -165,6 +169,24 @@ function Desktop() {
         toggleInternet(false);
     }, []);
 
+    const openDoom = useCallback(() => {
+        toggleDoom(true);
+        focusWindow('doom');
+    }, [focusWindow]);
+
+    const closeDoom = useCallback(() => {
+        toggleDoom(false);
+    }, []);
+
+    const openChexQuest = useCallback(() => {
+        toggleChexQuest(true);
+        focusWindow('chex-quest');
+    }, [focusWindow]);
+
+    const closeChexQuest = useCallback(() => {
+        toggleChexQuest(false);
+    }, []);
+
     const openHamsterDance = useCallback(() => {
         toggleHamsterDance(true);
         focusWindow('hamster');
@@ -207,6 +229,8 @@ function Desktop() {
                 openNotepad={openNotepad}
                 openRecycleBin={openRecycleBin}
                 openInternet={openInternet}
+                openDoom={openDoom}
+                openChexQuest={openChexQuest}
                 openHamsterDance={openHamsterDance}
                 activeSelection={activeSelection}
                 setActiveSelection={setActiveSelection}
@@ -310,6 +334,16 @@ function Desktop() {
             {
                 internetOpened && (
                     <Internet closeInternet={closeInternet} />
+                )
+            }
+            {
+                doomOpened && (
+                    <Doom closeDoom={closeDoom} isMobile={isMobile} />
+                )
+            }
+            {
+                chexQuestOpened && (
+                    <ChexQuest closeChexQuest={closeChexQuest} isMobile={isMobile} />
                 )
             }
             {

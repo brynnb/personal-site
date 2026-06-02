@@ -43,7 +43,7 @@ const StyledIcon = styled.img`
     image-rendering: pixelated;
 `;
 
-function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openInternet, openHamsterDance, openPhoto, openDefrag, activeSelection, setActiveSelection }) {
+function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openInternet, openDoom, openChexQuest, openHamsterDance, openPhoto, openDefrag, activeSelection, setActiveSelection }) {
     const lastClickTime = React.useRef(0);
     const lastClickId = React.useRef(null);
 
@@ -93,6 +93,32 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
                     <Explore variant="32x32_4" />
                 </div>
                 <div className="shortcut-label">The Internet</div>
+            </StyledShorcut>
+
+            <StyledShorcut
+                isSelected={activeSelection === 'doom'}
+                onClick={(e) => handleIconClick('doom', openDoom, e)}
+            >
+                <div className="icon-wrapper">
+                    <StyledIcon
+                        src={`${process.env.PUBLIC_URL}/icons/doomicon.png`}
+                        alt="DOOM.exe"
+                    />
+                </div>
+                <div className="shortcut-label">DOOM</div>
+            </StyledShorcut>
+
+            <StyledShorcut
+                isSelected={activeSelection === 'chex-quest'}
+                onClick={(e) => handleIconClick('chex-quest', openChexQuest, e)}
+            >
+                <div className="icon-wrapper">
+                    <StyledIcon
+                        src={`${process.env.PUBLIC_URL}/icons/chex.ico`}
+                        alt="Chex Quest.exe"
+                    />
+                </div>
+                <div className="shortcut-label">Chex Quest</div>
             </StyledShorcut>
 
             <StyledShorcut
