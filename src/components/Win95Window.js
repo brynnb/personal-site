@@ -21,6 +21,7 @@ function Win95Window({
     menu = [],
     style = {},
     isMobile = false,
+    draggable = true,
 }) {
     const { openWindow, closeWindow, focusWindow, getZIndex, activeWindowId } = useWindowManager();
     const draggableRef = useRef(null);
@@ -29,6 +30,7 @@ function Win95Window({
 
     useDraggable(draggableRef, {
         handle: '.draggable',
+        disabled: !draggable,
     });
 
     // Register window on mount, unregister on unmount

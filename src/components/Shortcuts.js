@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Mspaint, Notepad2, Computer, Network2, RecycleFull, Explore, Folder, Wangimg130 } from '@react95/icons'
+import { Mspaint, Notepad2, Computer, Network2, RecycleFull, Explore, Folder, Wangimg130, MediaCd } from '@react95/icons'
 import { startWebamp } from '../utils/startWebamp';
 
 const StyledShorcut = styled.div`
@@ -43,7 +43,7 @@ const StyledIcon = styled.img`
     image-rendering: pixelated;
 `;
 
-function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openInternet, openDoom, openChexQuest, openHamsterDance, openPhoto, openDefrag, activeSelection, setActiveSelection }) {
+function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openInternet, openDoom, openChexQuest, openHamsterDance, openPhoto, openDefrag, openAmbience, activeSelection, setActiveSelection }) {
     const lastClickTime = React.useRef(0);
     const lastClickId = React.useRef(null);
 
@@ -93,6 +93,20 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
                     <Explore variant="32x32_4" />
                 </div>
                 <div className="shortcut-label">The Internet</div>
+            </StyledShorcut>
+
+            <StyledShorcut
+                isSelected={activeSelection === 'ambience'}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveSelection('ambience');
+                    openAmbience();
+                }}
+            >
+                <div className="icon-wrapper">
+                    <MediaCd variant="32x32_4" />
+                </div>
+                <div className="shortcut-label">Ambience</div>
             </StyledShorcut>
 
             <StyledShorcut

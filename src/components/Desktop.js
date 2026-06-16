@@ -7,11 +7,12 @@ import Player from './Player';
 import Paint from './Paint';
 import Internet from './Internet';
 import HamsterDance from './HamsterDance';
+import Ambience from './Ambience';
 import Doom from './Doom';
 import ChexQuest from './ChexQuest';
 import Taskbar from './Taskbar';
 import { Alert, TitleBar } from '@react95/core';
-import { Wangimg130 } from '@react95/icons';
+import { Wangimg130, MediaCd } from '@react95/icons';
 import { useClippy } from '@react95/clippy';
 import Defrag from './Defrag';
 import { useWindowManager } from '../contexts/windowContext';
@@ -23,6 +24,7 @@ const funnyLines = [
 ];
 
 const PHOTO_ICON = <Wangimg130 variant="16x16_4" />;
+const AMBIENCE_ICON = <MediaCd variant="16x16_4" />;
 
 function Desktop() {
     const isMobile = window.innerWidth < 850;
@@ -50,6 +52,7 @@ function Desktop() {
     const [clockAlertOpened, toggleClockAlert] = useState(false);
     const [photoOpened, togglePhoto] = useState(false);
     const [defragOpened, toggleDefrag] = useState(false);
+    const [ambienceOpened, toggleAmbience] = useState(false);
     const [projectsOpened, toggleProjects] = useState(false);
     const [projectsItem, setProjectsItem] = useState(null);
 
@@ -196,6 +199,15 @@ function Desktop() {
         toggleHamsterDance(false);
     }, []);
 
+    const openAmbience = useCallback(() => {
+        toggleAmbience(true);
+        focusWindow('ambience');
+    }, [focusWindow]);
+
+    const closeAmbience = useCallback(() => {
+        toggleAmbience(false);
+    }, []);
+
     const openClockAlert = useCallback(() => toggleClockAlert(true), []);
     const closeClockAlert = useCallback(() => toggleClockAlert(false), []);
 
@@ -236,6 +248,7 @@ function Desktop() {
                 setActiveSelection={setActiveSelection}
                 openPhoto={openPhoto}
                 openDefrag={openDefrag}
+                openAmbience={openAmbience}
             />
             {
                 explorerOpened && (
@@ -349,6 +362,31 @@ function Desktop() {
             {
                 hamsterDanceOpened && (
                     <HamsterDance closeHamsterDance={closeHamsterDance} />
+                )
+            }
+            {
+                ambienceOpened && (
+                    <Win95Window
+                        id="ambience"
+                        icon={AMBIENCE_ICON}
+                        title="Ambience"
+                        onClose={closeAmbience}
+                        draggable={false}
+                        style={{
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: '28px',
+                            width: '100vw',
+                            height: 'calc(100vh - 28px)',
+                            transform: 'none',
+                            boxSizing: 'border-box',
+                            userSelect: 'none'
+                        }}
+                    >
+                        <Ambience />
+                    </Win95Window>
                 )
             }
             {
