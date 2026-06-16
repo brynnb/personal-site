@@ -245,6 +245,19 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
                 </div>
                 <div className="shortcut-label">Vanguard: Eternal Sagas</div>
             </StyledShorcut>
+
+            <StyledShorcut
+                isSelected={activeSelection === 'vayeate'}
+                onClick={(e) => handleIconClick('vayeate', () => window.open('https://www.vayeate.com/', '_blank'), e)}
+            >
+                <div className="icon-wrapper">
+                    <StyledIcon
+                        src={`${process.env.PUBLIC_URL}/icons/vayeate.png`}
+                        alt="Vayeate"
+                    />
+                </div>
+                <div className="shortcut-label">Vayeate</div>
+            </StyledShorcut>
         </div>
     )
 }
