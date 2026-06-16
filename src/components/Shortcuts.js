@@ -270,7 +270,7 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
                         alt="Vayeate"
                     />
                 </div>
-                <div className="shortcut-label">Vayeate</div>
+                <div className="shortcut-label">Vayeate Game Studio</div>
             </StyledShorcut>
         </div>
     )
