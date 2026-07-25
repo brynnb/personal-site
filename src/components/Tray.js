@@ -5,8 +5,8 @@ import { Sndvol32304, Network3 } from '@react95/icons';
 
 const StyledTray = styled(Frame)`
     position: fixed;
-    bottom: calc(var(--crt-safe-bottom) + 2px);
-    right: calc(var(--crt-safe-right) + 2px);
+    bottom: 2px;
+    right: 2px;
     height: 24px;
     display: flex;
     align-items: center;
@@ -29,7 +29,7 @@ const IconWrapper = styled.div`
 `;
 
 const TimeText = styled.div`
-    font-size: 12px;
+    font-size: 13px;
     margin-left: 2px;
     margin-right: 4px;
     cursor: pointer;

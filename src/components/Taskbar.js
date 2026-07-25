@@ -32,10 +32,7 @@ const START_SUBMENU_WIDTH = 240;
 const START_SUBMENU_ICON_SIZE = 16;
 
 const TaskBarFrame = styled(Frame)`
-    left: var(--crt-safe-left) !important;
-    right: var(--crt-safe-right) !important;
-    bottom: var(--crt-safe-bottom) !important;
-    width: auto !important;
+    align-items: center;
     padding-right: 80px;
     z-index: 999999 !important;
 
@@ -172,7 +169,7 @@ const WindowButton = styled.button`
     padding: 2px 6px;
     width: 160px;
     height: 22px;
-    font-size: 11px;
+    font-size: 12px;
     font-family: inherit;
     border: none;
     cursor: pointer;
@@ -198,7 +195,7 @@ const StartButton = styled.button`
     gap: 4px;
     padding: 2px 6px;
     height: 22px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
     font-family: inherit;
     border: none;
@@ -214,13 +211,20 @@ const StartButton = styled.button`
     }
 `;
 
+const StartLabel = styled.span`
+    transform: translateY(-3px);
+`;
+
 const WindowTitle = styled.span`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    transform: translateY(1px);
+
 `;
 
 const WindowButtonsArea = styled(Frame)`
+    align-items: center;
 `;
 
 function AcceleratorLabel({ text, accelerator }) {
@@ -442,7 +446,7 @@ function Taskbar({
                         onClick={() => setShowList(!showList)}
                     >
                         <Logo variant="32x32_4" style={{ width: 20, height: 20 }} />
-                        Start
+                        <StartLabel>Start</StartLabel>
                     </StartButton>
 
                     <WindowButtonsArea w="100%" paddingLeft="$0" ml="$2" display="flex">

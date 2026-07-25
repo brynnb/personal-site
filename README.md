@@ -7,5 +7,4 @@ Brynn's personal website in old-school Windows 95 style.
 * Classic MS Paint remake [JS Paint](https://github.com/1j01/jspaint)
 * Doom window powered by [EmulatorJS](https://emulatorjs.org/)
 * DOOM1.WAD is the Doom shareware v1.9 IWAD
-* CRT frame adapted from [Retromator](https://github.com/Chafalleiro/retromator), BSD-2-Clause
 * Fake BIOS sequence inspired by [award-bios-recreation](https://github.com/ncot-tech/award-bios-recreation), MIT

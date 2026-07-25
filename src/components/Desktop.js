@@ -232,9 +232,13 @@ function Desktop({ onShutdown }) {
 
     return (
         <div
-            className="site-desktop-shell"
             onClick={handleBackgroundClick}
             style={{
+                height: '100vh',
+                width: '100vw',
+                position: 'fixed',
+                top: 0,
+                left: 0,
                 zIndex: 0
             }}
         >
@@ -331,7 +335,7 @@ function Desktop({ onShutdown }) {
                         closeNotepad={() => toggleProjects(false)}
                         selectedItem={projectsItem}
                         style={{
-                            left: isMobile ? '100px' : 'max(var(--crt-safe-left), calc(50% - 600px))',
+                            left: isMobile ? '100px' : 'calc(50% - 600px)',
                             top: isMobile ? '15%' : 'calc(10% + 200px)',
                         }}
                     />
@@ -377,12 +381,12 @@ function Desktop({ onShutdown }) {
                         draggable={false}
                         style={{
                             position: 'fixed',
-                            top: 'var(--crt-safe-top)',
-                            left: 'var(--crt-safe-left)',
-                            right: 'var(--crt-safe-right)',
-                            bottom: 'calc(var(--crt-safe-bottom) + 28px)',
-                            width: 'calc(100vw - var(--crt-safe-left) - var(--crt-safe-right))',
-                            height: 'calc(100vh - var(--crt-safe-top) - var(--crt-safe-bottom) - 28px)',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: '28px',
+                            width: '100vw',
+                            height: 'calc(100vh - 28px)',
                             transform: 'none',
                             boxSizing: 'border-box',
                             userSelect: 'none'
