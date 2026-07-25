@@ -46,11 +46,13 @@ const StyledContent = styled.div`
     height: calc(100% - 16px);
     overflow-y: scroll;
     overflow-x: hidden;
+    overscroll-behavior: none;
     white-space: pre-wrap;
     word-break: break-word;
     box-sizing: border-box;
-    font-family: 'MS Sans Serif', 'Fixedsys', monospace;
-    font-size: ${({ $largeText }) => ($largeText ? '16px' : '14px')};
+    font-family: 'Fixedsys Excelsior', 'Fixedsys', monospace;
+    font-size: 16px;
+    font-variant-ligatures: none;
     padding: 4px;
     padding-bottom: 80px;
     background: white;
@@ -64,6 +66,7 @@ const StyledContent = styled.div`
     }
 
     a {
+        font-family: 'Fixedsys Excelsior', 'Fixedsys', monospace;
         color: blue;
         text-decoration: underline;
         cursor: pointer;
@@ -466,7 +469,7 @@ function Notepad({ id = "notepad", closeNotepad, selectedItem, style }) {
                     left: 'calc(50% - 300px)',
                     top: '10%',
                     width: 600,
-                    height: selectedItem.id === 'about' ? 450 : 600,
+                    height: selectedItem.id === 'about' ? 470 : 600,
                     boxSizing: 'border-box',
                     overflow: 'hidden',
                     border: '1px solid var(--r95-color-borderDark)',

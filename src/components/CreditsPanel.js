@@ -84,6 +84,11 @@ function CreditsPanel({ onClose, isMobile }) {
                         <dd>
                             Powered by <a href="https://github.com/1j01/jspaint" target="_blank" rel="noreferrer">JS Paint</a>.
                         </dd>
+
+                        <dt>3D Pipes Screensaver</dt>
+                        <dd>
+                            Powered by <a href="https://github.com/1j01/pipes" target="_blank" rel="noreferrer">Pipes</a> by Isaiah Odhner.
+                        </dd>
                     </dl>
                 </CreditsBody>
             </Frame>

@@ -1,0 +1,11 @@
+Fixedsys Excelsior
+
+Original font by Darien Valentine. This derivative is maintained at:
+https://github.com/kika/fixedsys
+
+The creator(s) have released this work into the public domain. Where public
+domain dedication is not permitted, the work is released under the Creative
+Commons CC0 1.0 Universal dedication.
+
+Source release:
+https://github.com/kika/fixedsys/releases/tag/v3.09.10

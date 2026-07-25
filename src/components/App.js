@@ -13,6 +13,14 @@ import BiosShutdownOverlay from './BiosShutdownOverlay';
 const dataService = new DataService();
 
 const GlobalStyles = createGlobalStyle`
+  @font-face {
+    font-family: 'Fixedsys Excelsior';
+    src: url('/fonts/fixedsys-excelsior.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+
   body {
     font-size: 15px;
     background-color: #008080;

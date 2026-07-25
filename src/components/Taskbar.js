@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
+import React, { useState, useEffect, useRef, useContext, useCallback } from 'react'
 import { Frame, List } from '@react95/core'
 import {
     FileFind,
@@ -22,6 +22,9 @@ import Tray from './Tray'
 import DataContext from '../contexts/dataContext'
 import { useWindowManager } from '../contexts/windowContext'
 import { startWebamp } from '../utils/startWebamp'
+import BsodOverlay from './BsodOverlay'
+import RunDialog from './RunDialog'
+import PipesScreensaver from './PipesScreensaver'
 
 const START_MENU_WIDTH = 240;
 const START_MENU_RAIL_WIDTH = 32;
@@ -257,7 +260,20 @@ function Taskbar({
     const { openWindows, activeWindowId, focusWindow } = useWindowManager();
     const data = useContext(DataContext);
     const [showList, setShowList] = useState(false);
+    const [showBsod, setShowBsod] = useState(false);
+    const [showRunDialog, setShowRunDialog] = useState(false);
+    const [showPipes, setShowPipes] = useState(false);
     const taskbarRef = useRef(null);
+    const openWindowsUpdate = useCallback(() => setShowBsod(true), []);
+    const closeWindowsUpdate = useCallback(() => setShowBsod(false), []);
+    const openRunDialog = useCallback(() => setShowRunDialog(true), []);
+    const closeRunDialog = useCallback(() => setShowRunDialog(false), []);
+    const openPipes = useCallback(() => setShowPipes(true), []);
+    const closePipes = useCallback(() => setShowPipes(false), []);
+    const runCommand = useCallback(() => {
+        setShowRunDialog(false);
+        setShowBsod(true);
+    }, []);
 
     const runMenuAction = (event, action) => {
         event.stopPropagation();
@@ -341,7 +357,7 @@ function Taskbar({
                             <StyledList>
                                 <List.Item
                                     icon={<Intl101 variant="32x32_4" />}
-                                    onClick={(event) => runMenuAction(event)}
+                                    onClick={(event) => runMenuAction(event, openWindowsUpdate)}
                                 >
                                     Windows Update
                                 </List.Item>
@@ -387,7 +403,7 @@ function Taskbar({
                                 </List.Item>
                                 <List.Item
                                     icon={<Settings variant="32x32_4" />}
-                                    onClick={(event) => runMenuAction(event)}
+                                    onClick={(event) => runMenuAction(event, openPipes)}
                                 >
                                     <AcceleratorLabel text="Settings" accelerator="S" />
                                 </List.Item>
@@ -426,7 +442,7 @@ function Taskbar({
                                 </List.Item>
                                 <List.Item
                                     icon={<Rundll1 variant="32x32_4" />}
-                                    onClick={(event) => runMenuAction(event)}
+                                    onClick={(event) => runMenuAction(event, openRunDialog)}
                                 >
                                     <AcceleratorLabel text="Run" accelerator="R" />
                                 </List.Item>
@@ -468,6 +484,11 @@ function Taskbar({
                 </TaskBarFrame>
             </div>
             <Tray onClockClick={onClockClick} />
+            {showBsod && <BsodOverlay onClose={closeWindowsUpdate} />}
+            {showRunDialog && (
+                <RunDialog onClose={closeRunDialog} onRun={runCommand} />
+            )}
+            {showPipes && <PipesScreensaver onClose={closePipes} />}
         </>
     )
 }

@@ -10,9 +10,9 @@ export default class DataService {
         parentId: 'desktop',
         content: {
           paragraphs: [
-            "Hi, I'm Brynn. I've been immersed in software for most of my life, starting at age 11 with Liberty BASIC. My early days were spent building GeoCities sites to host GameBoy emulators and Pokémon ROMs - a passion that eventually evolved into higher-stakes professional work. Throughout my career, I've had the opportunity to build solutions for high-profile clients like Amazon, Salesforce, NetSuite, Oracle, and Goodwill.",
+            "Hi, I'm Brynn. I've been immersed in software for most of my life, starting at age 11 with Liberty BASIC. My early days were spent building GeoCities sites to host GameBoy emulators and Pokémon ROMs - a passion that eventually evolved into higher-stakes professional work. Throughout my career, I've had the opportunity to build solutions for clients like Amazon, Salesforce, NetSuite, Oracle, and Goodwill.",
             "Over the past couple of years, I’ve taken a break from the corporate world to travel, reconnect with family, and dive deep into personal passion projects. I've had a life-long love of RPGs, emulation, and deconstructing software, and it remains the center focus of many of my projects. Check out my Projects.txt!",
-            "I'm currently looking for a new opportunity in software development, technical project management, or technical product management. I'm living in the Bay Area in California and open to in-person, hybrid, or remote roles. My LinkedIn resume and other projects are also all discoverable here:",
+            "I'm currently looking for a new opportunity in software, ideally beyond a purely hands-on engineering role - something closer to technical project management or technical product management. I'm open to a range of possibilities. I'm based in the Bay Area and open to in-person, hybrid, or remote roles.",
             "https://github.com/brynnb",
             "https://www.linkedin.com/in/brynn-bateman/",
             "contact2026@brynnbateman.com",
@@ -66,7 +66,7 @@ export default class DataService {
             },
             {
               title: "IdleQuest",
-              description: "A from-scratch recreation of the 1999 MMORPG classic EverQuest, featuring a real-time MMO server written in Go, a 3D game client built with Babylon.js, and a faithfully recreated interface using React. I spent hundreds of hours extracting, cleaning, and organizing original game data and assets to recapture the look, feel, and experience of the original.",
+              description: "A from-the-ground-up recreation of the 1999 classic, EverQuest. It features a custom real-time MMO server built in Go, a custom 3D renderer, and an authentic UI painstakingly crafted in React. I spent hundreds of hours meticulously scraping, cleaning, and organizing original data and graphics to recapture the original experience.",
               techStack: "React, Go, WebSockets, MySQL",
               url: "https://idlequest.net",
               repo: "https://github.com/brynnb/idlequest",
