@@ -66,7 +66,7 @@ export default class DataService {
             },
             {
               title: "IdleQuest",
-              description: "A from-the-ground-up recreation of the 1999 classic, EverQuest. It features a custom real-time MMO server built in Go, a bespoke 3D renderer, and an authentic UI painstakingly crafted in React. I spent hundreds of hours meticulously scraping, cleaning, and organizing original data and graphics to recapture the original experience.",
+              description: "A from-scratch recreation of the 1999 MMORPG classic EverQuest, featuring a real-time MMO server written in Go, a 3D game client built with Babylon.js, and a faithfully recreated interface using React. I spent hundreds of hours extracting, cleaning, and organizing original game data and assets to recapture the look, feel, and experience of the original.",
               techStack: "React, Go, WebSockets, MySQL",
               url: "https://idlequest.net",
               repo: "https://github.com/brynnb/idlequest",
