@@ -60,12 +60,12 @@ function Paint({ closePaint }) {
                     title="Paint"
                     onClose={closePaint}
                     style={{
-                        width: "100%",
-                        height: "100%",
-                        maxWidth: '100vw',
-                        maxHeight: '100vh',
-                        top: 0,
-                        left: 0,
+                        width: 'calc(100vw - var(--crt-safe-left) - var(--crt-safe-right))',
+                        height: 'calc(100vh - var(--crt-safe-top) - var(--crt-safe-bottom))',
+                        maxWidth: 'calc(100vw - var(--crt-safe-left) - var(--crt-safe-right))',
+                        maxHeight: 'calc(100vh - var(--crt-safe-top) - var(--crt-safe-bottom))',
+                        top: 'var(--crt-safe-top)',
+                        left: 'var(--crt-safe-left)',
                     }}
                 >
                     <Frame style={{ padding: 0, width: "100%", height: "100%", border: 'none' }}>

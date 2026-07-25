@@ -5,8 +5,8 @@ import { Sndvol32304, Network3 } from '@react95/icons';
 
 const StyledTray = styled(Frame)`
     position: fixed;
-    bottom: 2px;
-    right: 2px;
+    bottom: calc(var(--crt-safe-bottom) + 2px);
+    right: calc(var(--crt-safe-right) + 2px);
     height: 24px;
     display: flex;
     align-items: center;

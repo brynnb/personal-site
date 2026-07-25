@@ -61,7 +61,7 @@ export default class DataService {
               title: "Vanguard: Eternal Sagas",
               description: "A reverse-engineering and reimplementation of Vanguard: Saga of Heroes, an MMORPG from 2007 that was ultimately shut down in 2014. Built an extensive custom binary asset extractor that decodes the game's proprietary terrain, mesh, audio, texture, and data formats, then streams them live into both web-based and desktop game engines. With reverse engineering 95% complete and nearly all assets extracted, work continues on its integration into a playable world!",
               techStack: "Babylon.js, React, Python, Cloudflare R2",
-              url: "https://www.eternalsagas.com/",
+              url: "https://eternalsagas.com/",
               repo: "https://github.com/brynnb/vanguard-saga-of-heroes-asset-extractor",
             },
             {
@@ -80,8 +80,8 @@ export default class DataService {
             },
             {
               title: "New Yokosuka",
-              description: "A web-based asset viewer for the original Dreamcast version of Shenmue that renders binary MT5 models directly in your browser via Babylon.js. It features custom-built parsers and a first-person navigation system for exploring the game's iconic 3D environments.",
-              techStack: "Babylon.js, TypeScript, Python, Cloudflare R2",
+              description: "An online multiplayer recreation of Shenmue's Yokosuka built directly from original Dreamcast data. Custom parsers decode MT5 maps, characters, textures, animations, and scripted object placement into a shared Babylon.js world where players can explore the game's iconic neighborhoods together. The project also includes a browser-based asset viewer for inspecting the original models and environments.",
+              techStack: "Babylon.js, JavaScript, Go, WebSockets, Cloudflare R2",
               url: "https://newyokosuka.com",
               repo: "https://github.com/brynnb/new-yokosuka",
             },

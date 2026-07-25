@@ -64,7 +64,7 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', maxHeight: 'calc(100vh - 30px)', width: 'fit-content' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', maxHeight: 'calc(100% - 30px)', width: 'fit-content' }}>
             <StyledShorcut
                 isSelected={activeSelection === 'computer'}
                 onClick={(e) => handleIconClick('computer', openDefrag, e)}

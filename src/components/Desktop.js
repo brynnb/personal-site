@@ -11,6 +11,7 @@ import Ambience from './Ambience';
 import Doom from './Doom';
 import ChexQuest from './ChexQuest';
 import Taskbar from './Taskbar';
+import CreditsPanel from './CreditsPanel';
 import { Alert, TitleBar } from '@react95/core';
 import { Wangimg130, MediaCd } from '@react95/icons';
 import { useClippy } from '@react95/clippy';
@@ -26,7 +27,7 @@ const funnyLines = [
 const PHOTO_ICON = <Wangimg130 variant="16x16_4" />;
 const AMBIENCE_ICON = <MediaCd variant="16x16_4" />;
 
-function Desktop() {
+function Desktop({ onShutdown }) {
     const isMobile = window.innerWidth < 850;
 
     const data = useContext(DataContext);
@@ -55,6 +56,7 @@ function Desktop() {
     const [ambienceOpened, toggleAmbience] = useState(false);
     const [projectsOpened, toggleProjects] = useState(false);
     const [projectsItem, setProjectsItem] = useState(null);
+    const [creditsOpened, toggleCredits] = useState(false);
 
     useEffect(() => {
         if (clippy && !isMobile) {
@@ -210,6 +212,11 @@ function Desktop() {
 
     const openClockAlert = useCallback(() => toggleClockAlert(true), []);
     const closeClockAlert = useCallback(() => toggleClockAlert(false), []);
+    const openCredits = useCallback(() => {
+        toggleCredits(true);
+        focusWindow('credits-help');
+    }, [focusWindow]);
+    const closeCredits = useCallback(() => toggleCredits(false), []);
 
     const openPhoto = useCallback(() => {
         togglePhoto(true);
@@ -225,13 +232,9 @@ function Desktop() {
 
     return (
         <div
+            className="site-desktop-shell"
             onClick={handleBackgroundClick}
             style={{
-                height: '100vh',
-                width: '100vw',
-                position: 'fixed',
-                top: 0,
-                left: 0,
                 zIndex: 0
             }}
         >
@@ -328,7 +331,7 @@ function Desktop() {
                         closeNotepad={() => toggleProjects(false)}
                         selectedItem={projectsItem}
                         style={{
-                            left: isMobile ? '100px' : 'calc(50% - 600px)',
+                            left: isMobile ? '100px' : 'max(var(--crt-safe-left), calc(50% - 600px))',
                             top: isMobile ? '15%' : 'calc(10% + 200px)',
                         }}
                     />
@@ -374,12 +377,12 @@ function Desktop() {
                         draggable={false}
                         style={{
                             position: 'fixed',
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            bottom: '28px',
-                            width: '100vw',
-                            height: 'calc(100vh - 28px)',
+                            top: 'var(--crt-safe-top)',
+                            left: 'var(--crt-safe-left)',
+                            right: 'var(--crt-safe-right)',
+                            bottom: 'calc(var(--crt-safe-bottom) + 28px)',
+                            width: 'calc(100vw - var(--crt-safe-left) - var(--crt-safe-right))',
+                            height: 'calc(100vh - var(--crt-safe-top) - var(--crt-safe-bottom) - 28px)',
                             transform: 'none',
                             boxSizing: 'border-box',
                             userSelect: 'none'
@@ -448,8 +451,23 @@ function Desktop() {
                     <Defrag closeDefrag={closeDefrag} />
                 )
             }
+            {
+                creditsOpened && (
+                    <CreditsPanel onClose={closeCredits} isMobile={isMobile} />
+                )
+            }
             <Player />
-            <Taskbar onClockClick={openClockAlert} />
+            <Taskbar
+                onClockClick={openClockAlert}
+                onShutdown={onShutdown}
+                openCredits={openCredits}
+                openPaint={openPaint}
+                openNotepad={openNotepad}
+                openDoom={openDoom}
+                openChexQuest={openChexQuest}
+                openPhoto={openPhoto}
+                openAmbience={openAmbience}
+            />
         </div>
     )
 }

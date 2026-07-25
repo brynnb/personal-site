@@ -35,8 +35,8 @@ const StyledContent = styled.div`
     word-break: break-word;
     box-sizing: border-box;
     font-family: 'MS Sans Serif', 'Fixedsys', monospace;
-    font-size: 14px;
-    padding: 2px;
+    font-size: ${({ $largeText }) => ($largeText ? '16px' : '14px')};
+    padding: 4px;
     padding-bottom: 80px;
     background: white;
     user-select: text;
@@ -188,6 +188,7 @@ const NOTEPAD_ICON = <NotepadIcon variant="16x16_4" />;
 function Notepad({ id = "notepad", closeNotepad, selectedItem, style }) {
     const data = useContext(DataContext);
     const fullItem = data.getItem(selectedItem.id);
+    const largeText = selectedItem.id === 'about' || selectedItem.id === 'projects';
 
     const getContent = (item) => {
         if (!item || !item.content) return '';
@@ -252,7 +253,7 @@ function Notepad({ id = "notepad", closeNotepad, selectedItem, style }) {
                     }}
                 >
                     <ContentWrapper>
-                        <StyledContent>
+                        <StyledContent $largeText={largeText}>
                             {linkify(getContent(fullItem))}
                         </StyledContent>
                         <FakeVerticalScrollbar>
