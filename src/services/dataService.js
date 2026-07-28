@@ -20,37 +20,6 @@ export default class DataService {
         },
       },
       {
-        id: 'resume',
-        name: 'Resume.txt',
-        icon: 'notepad_2',
-        parentId: 'desktop',
-        content: {
-          resumeLink:
-            'https://docs.google.com/document/d/YOUR_RESUME_ID/export?format=pdf',
-          workExperience: [
-            {
-              jobTitle: 'Software Developer',
-              company: 'Your Company',
-              location: 'Your Location',
-              period: 'START DATE – PRESENT',
-              accomplishments: [
-                'Building amazing applications',
-                'Developed key features from scratch',
-                'Technologies used: React, Node.js, etc.',
-              ],
-            },
-          ],
-          education: [
-            {
-              credit: 'Your Degree',
-              place: 'Your University',
-              gpa: '4.0 GPA',
-              period: 'START DATE – END DATE',
-            },
-          ],
-        },
-      },
-      {
         id: 'projects',
         name: 'Projects.txt',
         icon: 'flying_through_space_100',
@@ -58,18 +27,25 @@ export default class DataService {
         content: {
           projects: [
             {
+              title: "IdleQuest",
+              description: "A from-scratch recreation of the 1999 MMORPG classic EverQuest, featuring a real-time MMO server written in Go, a 3D game client built with Babylon.js, and a faithfully recreated interface using React. I spent hundreds of hours extracting, cleaning, and organizing original game data and assets to recapture the look, feel, and experience of the original.",
+              techStack: "React, Go, WebSockets, MySQL",
+              url: "https://idlequest.net",
+              repo: "https://github.com/brynnb/idlequest",
+            },
+            {
+              title: "New Yokosuka",
+              description: "An online multiplayer recreation of Shenmue's Yokosuka built directly from original Dreamcast data. Custom parsers decode MT5 maps, characters, textures, animations, and scripted object placement into a shared Babylon.js world where players can explore the game's iconic neighborhoods together. The project also includes a browser-based asset viewer for inspecting the original models and environments.",
+              techStack: "Babylon.js, JavaScript, Go, WebSockets, Cloudflare R2",
+              url: "https://newyokosuka.com",
+              repo: "https://github.com/brynnb/new-yokosuka",
+            },
+            {
               title: "Vanguard: Eternal Sagas",
               description: "A reverse-engineering and reimplementation of Vanguard: Saga of Heroes, an MMORPG from 2007 that was ultimately shut down in 2014. Built an extensive custom binary asset extractor that decodes the game's proprietary terrain, mesh, audio, texture, and data formats, then streams them live into both web-based and desktop game engines. With reverse engineering 95% complete and nearly all assets extracted, work continues on its integration into a playable world!",
               techStack: "Babylon.js, React, Python, Cloudflare R2",
               url: "https://eternalsagas.com/",
               repo: "https://github.com/brynnb/vanguard-saga-of-heroes-asset-extractor",
-            },
-            {
-              title: "IdleQuest",
-              description: "A from-the-ground-up recreation of the 1999 classic, EverQuest. It features a custom real-time MMO server built in Go, a custom 3D renderer, and an authentic UI painstakingly crafted in React. I spent hundreds of hours meticulously scraping, cleaning, and organizing original data and graphics to recapture the original experience.",
-              techStack: "React, Go, WebSockets, MySQL",
-              url: "https://idlequest.net",
-              repo: "https://github.com/brynnb/idlequest",
             },
             {
               title: "CaptureQuest",
@@ -79,11 +55,10 @@ export default class DataService {
               repo: "https://github.com/brynnb/capture-quest",
             },
             {
-              title: "New Yokosuka",
-              description: "An online multiplayer recreation of Shenmue's Yokosuka built directly from original Dreamcast data. Custom parsers decode MT5 maps, characters, textures, animations, and scripted object placement into a shared Babylon.js world where players can explore the game's iconic neighborhoods together. The project also includes a browser-based asset viewer for inspecting the original models and environments.",
-              techStack: "Babylon.js, JavaScript, Go, WebSockets, Cloudflare R2",
-              url: "https://newyokosuka.com",
-              repo: "https://github.com/brynnb/new-yokosuka",
+              title: "DalaDose",
+              description: "A specialized planning and analysis platform for radiation research. It lets researchers and clinicians review medical scans, visualize where radiation goes, define areas of interest, build treatment equipment in 3D, run scientific simulations, and compare results - all in one organized workspace. DalaDose is being developed with guidance from industry professionals and Stanford researchers.",
+              techStack: "React, VTK.js, ITK.js, TOPAS",
+              url: "https://daladose.com/",
             },
           ],
         },
