@@ -38,6 +38,10 @@ const TaskBarFrame = styled(Frame)`
     align-items: center;
     padding-right: 80px;
     z-index: 999999 !important;
+    border-radius: 0 !important;
+    box-shadow:
+        inset 0 1px #ffffff,
+        inset 0 2px #dfdfdf !important;
 
     @media (max-width: 500px) {
         padding-right: 2px;
