@@ -56,7 +56,7 @@ export default class DataService {
             },
             {
               title: "Lucky Break",
-              description: "An original browser-based nine-ball pool game with a custom-built billiards physics engine, set inside Shenmue's MJQ Jazz Bar using assets extracted from the original Dreamcast game. It features complete nine-ball rules, computer-controlled opponents, and detailed ball, cushion, and table interactions built from scratch for the web.",
+              description: "A browser-based nine-ball pool game with a custom-built billiards physics engine, set inside Shenmue's MJQ Jazz Bar using assets extracted from the original 1999 Dreamcast game. It features complete nine-ball rules, computer-controlled opponents, detailed ball, cushion, and table interactions - and plenty of cheesy jazz music!",
               techStack: "TypeScript, Babylon.js, Vite, Custom Physics Engine",
               url: "https://luckybreak.app",
               repo: "https://github.com/brynnb/lucky-break",
