@@ -55,6 +55,13 @@ export default class DataService {
               repo: "https://github.com/brynnb/capture-quest",
             },
             {
+              title: "Lucky Break",
+              description: "An original browser-based nine-ball pool game with a custom-built billiards physics engine, set inside Shenmue's MJQ Jazz Bar using assets extracted from the original Dreamcast game. It features complete nine-ball rules, computer-controlled opponents, and detailed ball, cushion, and table interactions built from scratch for the web.",
+              techStack: "TypeScript, Babylon.js, Vite, Custom Physics Engine",
+              url: "https://luckybreak.app",
+              repo: "https://github.com/brynnb/lucky-break",
+            },
+            {
               title: "DalaDose",
               description: "A specialized planning and analysis platform for radiation research. It lets researchers and clinicians review medical scans, visualize where radiation goes, define areas of interest, build treatment equipment in 3D, run scientific simulations, and compare results - all in one organized workspace. DalaDose is being developed with guidance from industry professionals and Stanford researchers.",
               techStack: "React, VTK.js, ITK.js, TOPAS",
