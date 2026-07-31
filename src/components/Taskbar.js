@@ -307,6 +307,7 @@ function Taskbar({
         { label: 'Paint', icon: <Mspaint variant="32x32_4" />, action: openPaint },
         { label: 'IdleQuest', icon: imageIcon('/icons/idlequesticon.png', 'IdleQuest'), action: () => openUrl('https://idlequest.net') },
         { label: 'CaptureQuest', icon: imageIcon('/icons/capturequest.png', 'CaptureQuest'), action: () => openUrl('https://capturequest.net') },
+        { label: 'Lucky Break', icon: imageIcon('/icons/luckybreak.png', 'Lucky Break'), action: () => openUrl('https://luckybreak.app') },
         { label: 'New Yokosuka', icon: imageIcon('/images/ny.gif', 'New Yokosuka'), action: () => openUrl('https://www.newyokosuka.com/') },
         { label: 'Winamp', icon: imageIcon('/images/winamp.png', 'Winamp'), action: startWebamp },
         { label: 'Vanguard: Eternal Sagas', icon: imageIcon('/icons/vanguard.png', 'Vanguard: Eternal Sagas'), action: () => openUrl('https://eternalsagas.com/') },

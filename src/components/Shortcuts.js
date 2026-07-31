@@ -192,6 +192,19 @@ function Shortcuts({ openExplorer, openPaint, openNotepad, openRecycleBin, openI
             </StyledShorcut>
 
             <StyledShorcut
+                isSelected={activeSelection === 'luckybreak'}
+                onClick={(e) => handleIconClick('luckybreak', () => window.open('https://luckybreak.app', '_blank'), e)}
+            >
+                <div className="icon-wrapper">
+                    <StyledIcon
+                        src={`${process.env.PUBLIC_URL}/icons/luckybreak.png`}
+                        alt="Lucky Break"
+                    />
+                </div>
+                <div className="shortcut-label">Lucky Break</div>
+            </StyledShorcut>
+
+            <StyledShorcut
                 isSelected={activeSelection === 'newyokosuka'}
                 onClick={(e) => handleIconClick('newyokosuka', () => window.open('https://www.newyokosuka.com/', '_blank'), e)}
             >
